@@ -1,0 +1,173 @@
+----------------------------------------------------------------------------------------------------------------------------------------------------
+- sobre el uso de Python dentro de Visual Studio Code
+    .- Seguir los paso de los entornos virtuales
+    .- Cuando hemos escrito algún código en python, pulsamos la combinación de teclas ctrl+p 
+    esto es útil para poder setear la versión de python que tenemos instalada dentro del entorno virtual
+    .- Escribir signo de > y luego python interpreter, de ahí seleccionamos el que está instalado dentro del entorno
+    lo va a mostrar con una estrellita rellena.
+    
+    .- Formatear el código de Python en Visual Studio Code
+    .- ctrl+p signo de >  formatear documento , usamos autopep8..
+    
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+- sobre Python.
+    ---------------------------- uso de entornos virtuales.
+    .- Recomendable crear entornos virtuales para instalar nuevas versiones de python.
+    .- No hacerlo a nivel global de la instalación de linux.!!
+    .- Cada vez que vaya a crear un proyecto, hacerlo dentro de la carpeta PYTHON/PROYECTOS !!
+
+    Creamos una carpeta dentro de la carpeta PROYECTOS usando el mismo Visual Studio Code, por ejemplo Proyecto-0000
+    Cambiamos a esa carpeta desde el mismo Visual Studio Code. : 
+    
+                                LINUX LINUX LINUX LINUX LINUX LINUX LINUX LINUX LINUX LINUX LINUX LINUX LINUX
+                                                sudo apt install python3-venv -y
+                                                cambiamos de directorio..en donde queramos el entorno virtual..
+                                                python3 -m venv .linux_venv
+                                                source .linux_venv/bin/activate
+                                                par mi caso sería source linux_venv/bin/activate
+
+                                WINDOWS WINDOWS WINDOWS WINDOWS WINDOWS WINDOWS WINDOWS WINDOWS WINDOWS WINDOWS                                                 
+                                                
+                                                PS E:\GitHub\JMastrandrea.DEVELOPER\RepPython> python -m venv .virtualenvWindows
+                                                PS E:\GitHub\JMastrandrea.DEVELOPER\RepPython> .virtualenvWindows/Scripts/activate
+                                                (.virtualenvWindows) PS E:\GitHub\JMastrandrea.DEVELOPER\RepPython> 
+    
+    Ejecutar por primera vez                        :   virtualenv .nombre (podemos usar el mismo nombre del Proyecto)
+    Activar el entorno virtual                      :   source Proyecto-xxxx/bin/activate
+    En Windows se activa asì                        :   Proyecto-xxxx/bin/activate o  .venvAndroid_1/Scripts/activate
+    
+    ......cuando lo activamos vamos a ver el nombre del entorno virtual al principio, y si hacemos dir vamos a ver que aparece dentro del proyecto
+    una carpeta con el mismo nombre...recordar que el nombre del entorno no necesariamente debe ser el mismo que el del proyecto..
+    Instalar pip dentro                             :   pip3 install --upgrade pip
+    Instalar paquetes dentro del entorno virtual    :   python -m pip install <package-name>
+    ... desactivar el entorno virtual : deactivate (lo escribimos tal cual.., no cambiamos de carpeta ni nada..)
+
+
+    ---------------------------- instalaciones y actualizaciones de python (HACERLO DENTRO DE LOS ENTORNOS VIRTUALES..!!!).--------------------------
+    
+    python3 --version
+    sudo apt update && sudo apt upgrade -y
+    sudo add-apt-repository ppa:deadsnakes/ppa
+    sudo apt update
+    apt list | grep python3.12
+
+    ---------------------------- actualización de pip
+    pip3 install --upgrade pip
+
+    
+----------------------------------------------------------------------------------------------------------------------------------------------------
+    - sobre Pandas y otras librerías relacionadas.
+    .- Seguir los pasos para instalar entornos virtuales...(SIEMPRE DENTRO DE LOS ENTORNOS VIRTUALES..!)
+    .- Ejecutar la instalación de Pandas y otras... :   python -m pip install pandas
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+- sobre FastAPI.
+    .- Seguir los pasos para instalar y activar el entorno virtual
+    ..
+    pip install fastapi uvicorn sqlalchemy pymysql (lo podemos hacer todo junto de una..!)
+    .- Ejecutar uvicorn (es un servidor)
+    uvicorn app:app --reload    (la app que aparece detrás es el nombr de nuesta app y debe tener importado ya a FastAPI)
+    
+    .- Si dentro del navegador vamos a http://127.0.0.1:8000/docs veremos la integración con el paquete swager que es para hacer documentación
+    de nuestas Rest API
+    .- Creamos nuestra estructura para el proyecto: (se puede usar algún tipo de bash para esto)
+        -dentro del proyecto creamos estas carpetas : config, models, routes, schemas 
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+- sobre Django.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+-sobre sqlAlchem (ORM) y MySQL también MySQL Workbench !!!
+    -------sql Alchemy
+    .- Seguir los pasos para instalar y activar el entorno virtual
+    Instalar sql alchemy    :   pip3 install SQLAlchemy
+    Instalar py mysql       :   pip install pymysql
+    Instalar cryptography   :   pip install cryptography
+
+    *********************************************** PROBLEMAS CON EL VENV EN VISUAL STUDIO CODE QUE AFECTAN A SQLALCHEMY ************************
+    https://stackoverflow.com/questions/66869413/visual-studio-code-does-not-detect-virtual-environments
+    In VSCode open your command palette — Ctrl+Shift+P by default
+
+                        Look for Python: Select Interpreter
+
+                        In Select Interpreter choose Enter interpreter path... and then Find...
+
+                        Navigate to your venv folder — eg, ~/pyenvs/myenv/ or \Users\Foo\Bar\PyEnvs\MyEnv\
+
+                        In the virtual environment folder choose <your-venv-name>/bin/python or <your-venv-name>/bin/python3
+
+
+    ------MySQL
+    How To Install MySQL on Ubuntu 22.04 LTS (Linux) (2023) : ------> https://www.youtube.com/watch?v=zRfI79BHf3k
+    How to install MySQL on Ubuntu 20.04 : -------------------------> https://www.ionos.com/digitalguide/websites/web-development/installing-mysql-on-ubuntu-2004/
+
+    Desde la terminal de ubuntu : ctrl+alt+t
+    sudo apt update
+    sudo apt install mysql-server
+    sudo systemctl status mysql.service (para revisar el estado, en caso que que diga que no está activo usar : sudo systemctl start mysql.service)
+    sudo mysql ( de esta manera entramos al shell de MySQL) , escribir : exit y salimos del shell
+
+    ...si hacemos sudo mysql nos va saltar el error 1045 (28000) Access denied for user 'root'@'localhost' (ussing password No)
+    debemos hacer lo siguiente:
+        mysql -u root -p   (de esta manera nos va a pedir el pass para la conexión que será VicenteForEver)
+
+    Password y Usuarios:
+    sudo mysql_secure_installation
+    ... presionamos n ante la pregunta de validar la fortaleza del password...
+    ... para el caso que estemos en modo prueba o testing dejamos el usuario anonimo.. pero para usarlo en producción, debemos quitarlo
+    en el caso de la pregunta que sigue y para el caso de pruebas, decimos n
+    ... contestamos que no a la siguiente sobre la conección localhost..
+    ... dejamos la base test por las dudas que queramos usarla para puebas ...
+    ... para el caso de la pregunta : Reload privilege tables now? responder Y
+    ..
+    podemos cambiar el password de MySQL de la siguiente manera:
+    ejecutamos el shell de MySQL : 
+    sudo MySQL
+    ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'VicenteForEver'; --> VicenteForEver es la clave de MySQL, para la conexión
+
+    *********************************************************password de conexión a mySQL*******************************************************************
+    *********************************************                  VicenteForEver               ************************************************************
+    ********************************************************************************************************************************************************
+
+     ------MySQL Workbench
+     sudo snap install mysql-workbench-community   
+    
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+-- creando una bd en MySQL
+desde la terminal:
+mysql -u root -pVicenteForEver
+...dentro del shell de MySQL ejecutamos:
+create database storedb; (storedb es el nombre de la base de datos)
+show databases;
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+- sobre cómo hacer ingeniería inversa para convertir un modelo de BD en clases compatibles con SQLAlchemy
+    .- usamos           :   sqlautocode 0.5.2
+    .-instalación       :   pip install sqlautocode==0.5.2
+
+    Descripción de proyecto :
+    This is a tool that helps you creating a model based on an existing database scheme. 
+    The resulting code will be compatible with sqlalchemy.
+
+    https://pypi.org/project/sqlautocode/0.5.2/
+    Example: sqlautocode postgres://user:password@myhost/database -o out.py -t person*,account
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Speech Rec en Python:
+
+- seguir los pasos para utilizar el entorno virtual...
+- luego :
+        sudo apt install portaudio19-dev
+
+        pip install SpeechRecognition
+
+        pip install pyaudio
+
+            or
+
+        pip3 install pyaudio

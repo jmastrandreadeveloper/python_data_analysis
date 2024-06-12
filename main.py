@@ -7,9 +7,9 @@ from PIL import Image  # Asegúrate de que tienes Pillow instalado
 
 def main():
     print("Asegurando directorios necesarios...")
-    ensure_dir('RepPython/data_analysis_framework/data/processed')
-    ensure_dir('RepPython/data_analysis_framework/data/processed/images')
-    ensure_dir('RepPython/data_analysis_framework/data/processed/otrodir')
+    ensure_dir('data/processed')
+    ensure_dir('data/processed/images')
+    ensure_dir('data/processed/otrodir')
 
     # Carga de datos
     loader = DataLoader('Fluidez Lectora 1.csv')  # Provee solo el nombre del archivo
@@ -28,7 +28,7 @@ def main():
 
     print("Guardando datos procesados...")
     # Guardar datos procesados
-    save_dataframe_to_csv(data, 'RepPython/data_analysis_framework/data/processed/transformed/transformed_dataset.csv')
+    save_dataframe_to_csv(data, 'data/processed/transformed/transformed_dataset.csv')
 
     # print("Procesando y guardando imagen...")
     # # Procesamiento y guardado de una imagen (ejemplo)

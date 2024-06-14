@@ -30,8 +30,8 @@
                                 WINDOWS WINDOWS WINDOWS WINDOWS WINDOWS WINDOWS WINDOWS WINDOWS WINDOWS WINDOWS                                                 
                                                 
                                                 PS E:\GitHub\JMastrandrea.DEVELOPER\RepPython> python -m venv .virtualenvWindows
-                                                PS E:\GitHub\JMastrandrea.DEVELOPER\RepPython> .virtualenvWindows/Scripts/activate
-                                                (.virtualenvWindows) PS E:\GitHub\JMastrandrea.DEVELOPER\RepPython> 
+                                                PS E:\GitHub\JMastrandrea.DEVELOPER\RepPython> .windows_venv/Scripts/activate
+                                                (.windows_ven) PS E:\GitHub\PYTHON_DATA_ANALYSIS
     
     Ejecutar por primera vez                        :   virtualenv .nombre (podemos usar el mismo nombre del Proyecto)
     Activar el entorno virtual                      :   source Proyecto-xxxx/bin/activate

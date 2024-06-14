@@ -9,10 +9,19 @@ class DataLoader:
         self.filepath = os.path.join(os.path.dirname(__file__), '..', 'data', 'raw', filename)
 
     def detect_csv_properties(self, filepath):
+        
+        """
+        sep_            = ';'
+        encoding_       = "UTF-8"
+        lineterminator_ = '\n'
+        """
+        
         with open(filepath, 'rb') as file:
             rawdata = file.read()
         result = chardet.detect(rawdata)
         encoding = result['encoding']
+
+        print('encoding : ' , encoding)
 
         # Si se detecta UTF-8-SIG, tratarlo simplemente como UTF-8
         if encoding == 'UTF-8-SIG':

@@ -15,7 +15,7 @@ def main():
     loader = DataLoader('Fluidez Lectora 1.csv')  # Provee solo el nombre del archivo
     data = loader.load_csv()
 
-    print(data)
+    #print(data)
 
     print("Preprocesando datos...")
     # Preprocesamiento de datos

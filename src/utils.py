@@ -6,7 +6,7 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data')
 print('BASE_DIR ' , BASE_DIR)
 
 def save_dataframe_to_csv(dataframe, filepath):
-    dataframe.to_csv(filepath, index=False , sep=';', encoding="UTF-8", line_terminator='\n')
+    dataframe.to_csv(filepath, index=False , sep=';', encoding="UTF-8", lineterminator='\n')
 
 def ensure_dir(directory):
     # Obtiene la ruta absoluta del directorio a crear

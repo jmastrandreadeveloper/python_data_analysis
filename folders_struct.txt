@@ -8,7 +8,7 @@ data_analysis_framework/
 │   ├── interim/             # Datos intermedios, en proceso de transformación
 │   └── external/            # Datos de fuentes externas
 │
-├── notebooks/               # Notebooks de Jupyter para análisis exploratorio
+├── tutos&demos/             # tutoriales y demos de dataframes
 │
 ├── src/                     # Código fuente del framework
 │   ├── __init__.py

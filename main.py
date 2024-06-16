@@ -12,23 +12,29 @@ def main():
     ensure_dir('data/processed/otrodir')
 
     # Carga de datos
-    loader = DataLoader('Fluidez Lectora 1.csv')  # Provee solo el nombre del archivo
-    data = loader.load_csv()
+    loader = DataLoader('Nominal.csv')
+    df_nominal = loader.load_csv()
 
-    #print(data)
+    loader = DataLoader('Fluidez Lectora 1.csv')
+    df_FL_1 = loader.load_csv()
+
+    
 
     print("Preprocesando datos...")
     # Preprocesamiento de datos
-    data = clean_data(data)
-    data = transform_data(data)
+    df_FL_1 = clean_data(df_FL_1)
+    df_FL_1 = transform_data(df_FL_1)
     
-    if not validate_data(data):
-        print("La validación de los datos ha fallado.")
+    # Validar los datos nominales
+    is_valid, df_nominal_validated = validate_data(df_nominal)
+    if not is_valid:
+        print("La validación de los datos nominales ha fallado.")
         return
 
     print("Guardando datos procesados...")
     # Guardar datos procesados
-    save_dataframe_to_csv(data, 'data/processed/transformed/transformed_dataset.csv')
+    save_dataframe_to_csv(df_FL_1, 'data/processed/transformed/transformed_dataset.csv')
+    save_dataframe_to_csv(df_nominal_validated, 'data/processed/transformed/df_nominal_validated.csv')
 
     # print("Procesando y guardando imagen...")
     # # Procesamiento y guardado de una imagen (ejemplo)

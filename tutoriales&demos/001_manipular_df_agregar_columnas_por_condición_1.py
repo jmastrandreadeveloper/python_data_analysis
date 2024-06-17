@@ -1,7 +1,8 @@
 import pandas as pd
 
+print('\n')
 # Manipulación de DataFrames con pandas
-print('_'*70 + '\nCrear un diccionario de listas________________________________________\n' + '_'*70)
+print('Crear un diccionario de listas')
 data = {
     'Nombre'    : ['Ana', 'Luis', 'Carlos', 'Marta'],
     'Edad'      : [28, 34, 29, 42],
@@ -9,11 +10,10 @@ data = {
 }
 # Crear un DataFrame a partir del diccionario
 df = pd.DataFrame(data)
-print(df)
+print(df,'\n')
 
 # Agregar columnas
 # Puedes agregar nuevas columnas a un DataFrame basado en cálculos u otros datos.
-print('_'*50 + '\nAgregar una columna que indica si la persona es mayor de 30 años_________\n' + '_'*50)
+print('Agregar una columna que indica si la persona es mayor de 30 años')
 df['Mayor_de_30'] = df['Edad'] > 30
-print(df)
-print('_'*70 + '\n' + '_'*70)
+print(df,'\n')

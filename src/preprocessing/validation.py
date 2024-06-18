@@ -1,73 +1,139 @@
 import pandas as pd
 import numpy as np
 
-def create_age_reference(dataframe: pd.DataFrame) -> dict:
-    
+def create_age_reference() -> dict:
     """
-    usar un diccionario que pueda servir como referencia
+    Crear un diccionario de referencia de edades.
     """
-    
-    age_reference = {}
-    grouped = dataframe.groupby(['CURSO_NORMALIZADO', 'Nivel'])['Edad']
-    
-    for (curso, nivel), ages in grouped:
-        valid_ages = ages[ages > 0]  # Consider only valid ages
-        if not valid_ages.empty:
-            age_range = (valid_ages.min(), valid_ages.max())
-            age_reference[(curso, nivel)] = age_range
+    age_reference = {
+        ('Primario', '1°'): 6,
+        ('Primario', '2°'): 7,
+        ('Primario', '3°'): 8,
+        ('Primario', '4°'): 9,
+        ('Primario', '5°'): 10,
+        ('Primario', '6°'): 11,
+        ('Primario', '7°'): 12,
 
+        ('Secundario Orientado', '1°'): 13,
+        ('Secundario Orientado', '2°'): 14,
+        ('Secundario Orientado', '3°'): 15,
+        ('Secundario Orientado', '4°'): 16,
+        ('Secundario Orientado', '5°'): 17,
+
+        ('Secundario Técnico', '1°'): 13,
+        ('Secundario Técnico', '2°'): 14,
+        ('Secundario Técnico', '3°'): 15,
+        ('Secundario Técnico', '4°'): 16,
+        ('Secundario Técnico', '5°'): 17,
+        ('Secundario Técnico', '6°'): 18,
+    }
     return age_reference
 
-def validate_data(dataframe: pd.DataFrame):
-    print("Validating data...")
-    
-    # Check for missing values
+def check_missing_values(dataframe: pd.DataFrame) -> bool:
+    """
+    Verifica si hay valores faltantes en el DataFrame.
+    """
     if dataframe.isnull().sum().sum() > 0:
         print("Validation failed: Missing values found.")
-        return False, dataframe
-    
-    # Ensure 'Edad' column is numeric and convert it to int64
-    dataframe['Edad'] = pd.to_numeric(dataframe['Edad'], errors='coerce')
-    
-    # Example: Check for specific column data types
-    expected_dtypes = {        
-        'Edad': 'float64'  # Temporarily set to float64 for initial processing
-    }
-    
+        return False
+    return True
+
+def check_column_dtypes(dataframe: pd.DataFrame, expected_dtypes: dict) -> bool:
+    """
+    Verifica si las columnas tienen los tipos de datos esperados.
+    """
     for column, dtype in expected_dtypes.items():
         if column in dataframe.columns and dataframe[column].dtype != dtype:
             print(f"Validation failed: Column '{column}' has incorrect type. Expected {dtype}, got {dataframe[column].dtype}.")
-            return False, dataframe
+            return False
+    return True
 
-    # Create age reference based on the dataframe
-    age_reference = create_age_reference(dataframe)
-
-    # Function to assign an approximate age
-    def get_approximate_age(row):
+def correct_invalid_ages(dataframe: pd.DataFrame, age_reference: dict) -> pd.DataFrame:
+    """
+    Corrige las edades inválidas utilizando la referencia de edades.
+    """
+    def get_correct_age(row):
         key = (row['CURSO_NORMALIZADO'], row['Nivel'])
         if key in age_reference:
-            return np.mean(age_reference[key])
-        return np.nan  # Or some other default value
+            return age_reference[key]
+        return np.nan  # Return np.nan if key not found
 
+    # Convertir edades no válidas a NaN para su corrección
+    dataframe['Edad'] = pd.to_numeric(dataframe['Edad'], errors='coerce')
     invalid_ages_mask = (dataframe['Edad'] <= 0) | (dataframe['Edad'].isna())
+    print(invalid_ages_mask)
+
+    # Corregir edades inválidas
     if invalid_ages_mask.any():
-        dataframe.loc[invalid_ages_mask, 'Edad'] = dataframe[invalid_ages_mask].apply(get_approximate_age, axis=1)
+        dataframe.loc[invalid_ages_mask, 'Edad'] = dataframe[invalid_ages_mask].apply(get_correct_age, axis=1)
     
-    # Convert ages to int64 after correction
+    # Rastrear edades fuera del límite permitido y corregirlas
+    for (curso, nivel), edad in age_reference.items():
+        mask = (dataframe['CURSO_NORMALIZADO'] == curso) & (dataframe['Nivel'] == nivel)
+        dataframe.loc[mask & (dataframe['Edad'] > edad), 'Edad'] = edad
+
     dataframe['Edad'] = dataframe['Edad'].round().astype('Int64')
-    
-    # Re-check for invalid ages after correction
-    if (dataframe['Edad'] <= 0).any():
+    return dataframe
+
+
+def check_invalid_ages(dataframe: pd.DataFrame) -> bool:
+    """
+    Verifica si hay edades inválidas en el DataFrame.
+    """
+    if (dataframe['Edad'] <= 0).any() or dataframe['Edad'].isna().any():
         print("Validation failed: Invalid ages found after correction.")
-        return False, dataframe    
-    
-    # Example: Check for duplicate rows
+        return False
+    return True
+
+def check_duplicates(dataframe: pd.DataFrame) -> pd.DataFrame:
+    """
+    Verifica y elimina filas duplicadas en el DataFrame.
+    """
     if dataframe.duplicated().sum() > 0:
         print("Validation failed: Duplicate rows found.")
         duplicated_rows = dataframe[dataframe.duplicated()]
         print(duplicated_rows)
         dataframe.drop_duplicates(inplace=True)
         print("Duplicate rows removed.")
+    return dataframe
+
+def validate_data(dataframe: pd.DataFrame):
+    """
+    Función principal de validación de datos.
+    """
+    print("Validating data...")
+
+    # Create age reference based on the dataframe
+    age_reference = create_age_reference()
+
+    # Correct invalid ages
+    dataframe = correct_invalid_ages(dataframe, age_reference)
     
+    """
+    if not check_missing_values(dataframe):
+        return False, dataframe
+
+    # Convertir 'Edad' a tipo numérico y asegurarse de que sea int64
+    dataframe['Edad'] = pd.to_numeric(dataframe['Edad'], errors='coerce')
+
+    # Example: Check for specific column data types
+    expected_dtypes = {        
+        'Edad': 'Int64'  # Ensure Edad is integer type
+    }
+
+    if not check_column_dtypes(dataframe, expected_dtypes):
+        return False, dataframe
+
+    
+
+    # Re-check for invalid ages after correction
+    if not check_invalid_ages(dataframe):
+        return False, dataframe
+
+    # Check for duplicate rows
+    dataframe = check_duplicates(dataframe)
+    """
+
     print("Data validation passed.")
     return True, dataframe
+

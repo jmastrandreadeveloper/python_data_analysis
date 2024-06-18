@@ -16,9 +16,7 @@ def main():
     df_nominal = loader.load_csv()
 
     loader = DataLoader('Fluidez Lectora 1.csv')
-    df_FL_1 = loader.load_csv()
-
-    
+    df_FL_1 = loader.load_csv()    
 
     print("Preprocesando datos...")
     # Preprocesamiento de datos

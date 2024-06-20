@@ -1,12 +1,34 @@
 import os
 from PIL import Image
+import csv
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data'))
 
 print('BASE_DIR ' , BASE_DIR)
 
 def save_dataframe_to_csv(dataframe, filepath):
-    dataframe.to_csv(filepath, index=False , sep=';', encoding="UTF-8", lineterminator='\n')
+    try:
+        dict = {
+            'sep' : ';' ,
+            'encoding' : 'UTF-8' , 
+            'lineterminator' : '\n'
+        }
+        # Quitar '\r' de los nombres de las columnas
+        dataframe.columns = [c.replace('\r', 'a') for c in dataframe.columns]
+        dataframe.to_csv(
+            f'{filepath}',
+            sep = dict.get('sep') , encoding = dict.get('encoding') , lineterminator=dict.get('lineterminator'),            
+            #quoting=csv.QUOTE_ALL,
+            index=False,
+            header=True
+        )        
+    except:
+        print('..check nombre de archivo o espacio en disco..!' , f'{filepath}.csv')
+    else:
+        
+        print('..archivo ', filepath ,' grabado..!')
+    return
+    
 
 def ensure_dir(directory):
     # Obtiene la ruta absoluta del directorio a crear

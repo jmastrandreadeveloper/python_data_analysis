@@ -1,0 +1,1 @@
+acá pondremos los distintos tipos de filtrados a los datos pej filtrar por curso , por escuela por supervisión, etc

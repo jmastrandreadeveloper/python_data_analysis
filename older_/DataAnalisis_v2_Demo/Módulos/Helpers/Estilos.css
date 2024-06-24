@@ -1,0 +1,5 @@
+/* acá dfiniremos los estilos de los componentes */
+.titulo-resaltado{
+    font-weight: 'bold';
+    font-style: 'italic'
+}

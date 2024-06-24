@@ -40,12 +40,15 @@ def main():
     # processed_image = image.convert('L')  # Ejemplo de procesamiento simple
     # save_image(processed_image, 'data/processed/images/processed_image.jpg')
 
-    # print("Analizando datos...")
-    # # Análisis de datos
-    # analyzer = Analyzer(data)
-    # analyzer.plot_histogram('some_column')
-    # stats = analyzer.calculate_statistics()
-    # print(stats)
+    print("Analizando datos...")
+    # Análisis de datos
+    # voy a usar el que está validado de ejemplo..pero solo a modo de ejemplo
+    loader = DataLoader('transformed_dataset.csv')
+    transformed_dataset = loader.load_csv()
+    analyzer = Analyzer(transformed_dataset)
+    analyzer.plot_histogram('new_column')
+    stats = analyzer.calculate_statistics()
+    print(stats)
 
 if __name__ == "__main__":
     main()

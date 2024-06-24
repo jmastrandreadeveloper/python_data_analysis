@@ -1,0 +1,1 @@
+# acá irá la función para agrupar y le pasaremos diferentes parámetros por diccionario

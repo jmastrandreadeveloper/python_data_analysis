@@ -61,6 +61,9 @@ def save_image(image, filepath):
     # Guarda la imagen
     image.save(filepath)
 
+
+#############################################################################
+
 df = pd.DataFrame()
 
 def selectRows(df , columna , rowsList):    

@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from src.utils import quitar_retorno_de_columnas
 
 def create_age_reference() -> dict:
     """
@@ -104,7 +105,9 @@ def correct_invalid_ages(dataframe: pd.DataFrame, age_reference: dict) -> pd.Dat
     #     mask = (dataframe['CURSO_NORMALIZADO'] == curso) & (dataframe['Nivel'] == nivel)
     #     dataframe.loc[mask & (dataframe['Edad'] > edad), 'Edad'] = edad
     dataframe['Edad_Correcta'] = dataframe.apply(get_correct_age, axis=1, distancia=distancia_entre_edades)
-    # reordenar las columnas
+    # reordenar las columnas    
+    # Quitar '\r' de los nombres de las columnas
+    dataframe = quitar_retorno_de_columnas(dataframe)
     dataframe = dataframe[[
         'ciclo_lectivo',
         'Alumno_ID',

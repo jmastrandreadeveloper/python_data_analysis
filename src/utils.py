@@ -18,8 +18,7 @@ def save_dataframe_to_csv(dataframe, filepath):
             'encoding' : 'UTF-8' , 
             'lineterminator' : '\n'
         }
-        # Quitar '\r' de los nombres de las columnas
-        dataframe.columns = [c.replace('\r', 'a') for c in dataframe.columns]
+        dataframe = quitar_retorno_de_columnas(dataframe)
         dataframe.to_csv(
             f'{filepath}',
             sep = dict.get('sep') , encoding = dict.get('encoding') , lineterminator=dict.get('lineterminator'),            
@@ -34,6 +33,10 @@ def save_dataframe_to_csv(dataframe, filepath):
         print('..archivo ', filepath ,' grabado..!')
     return
     
+def quitar_retorno_de_columnas(dataframe):
+    # Quitar '\r' de los nombres de las columnas
+    dataframe.columns = [c.replace('\r', '') for c in dataframe.columns]
+    return dataframe
 
 def ensure_dir(directory):
     # Obtiene la ruta absoluta del directorio a crear

@@ -4,6 +4,7 @@ from src.analysis import Analyzer
 from src.reports import ReporteFluidezLectora_1_PorEscuela
 from src.utils import ensure_dir, save_dataframe_to_csv, obtener_datos_de_columna , save_image
 from PIL import Image  # Asegúrate de que tienes Pillow instalado
+from src.models.specific_dataframe import SpecificDataFrame
 
 
 def main():
@@ -22,6 +23,9 @@ def main():
     print("Preprocesando datos...")
     # Preprocesamiento de datos    
     df_FluidezLectora_1 = clean_data(df_FluidezLectora_1)
+    # Crear instancia de la clase específica
+    specific_df = SpecificDataFrame(df_FluidezLectora_1)
+    specific_df.imprimir()
     # en la llamada de abajo se hacen todos los agrupamientos necesarios
     # esta función debería traerme todos los agrupamientos que yo necesite
     dFsss_ = transform_data(df_FluidezLectora_1)

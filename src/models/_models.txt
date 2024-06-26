@@ -1,13 +1,2 @@
-los modelos se pueden interpretar como por ejemplo:
--una columna o una combinación de mas de una columna del dataframe,
-por ejemplo:
-CURSO_NORMALIZADO
-División
-Nivel_Unificado
-Nivel
-Supervisión
-CURSO_NORMALIZADO y División
-Escuela y CURSO_NORMALIZADO
-Escuela...
-...es decir aquellos objetos que vemos representados en las columnas del dataframe y
-que se propagan a través de las filas
+modelos:
+-data frmae fluidez lectora,

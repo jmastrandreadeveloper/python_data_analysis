@@ -14,7 +14,7 @@ class AbstractDataFrame(ABC):
     def filter_data(self):
         pass
 
-    def agrupar_por_criterio(dataframe , listaDeColumnas , agg_dict , reset_index):
+    def agrupar_por_criterio(self,dataframe , listaDeColumnas , agg_dict , reset_index):
         # esta función lo que va a hacer es agrupar un dataframe usando diferentes criterios,
         # el dFrame no está agrupado, en la lista de columnas están los criterios para agrupar
         # el agg_dict es la función matemática que vamos a usar en este caso siempre es count..
@@ -26,3 +26,18 @@ class AbstractDataFrame(ABC):
         else:
             dataframe = dataframe.groupby(listaDeColumnas).agg(agg_dict)
         return dataframe
+    
+    def calcular_desempeño(self,mergeOnColumn, dF_dataFrameIzquierdo, dF_dataFrameDerecha, ColumnaY, ColumnaX, col_titulo):    
+        # Esta función calcula los porcentajes de desempeños de acuerdo a las columnas que se les pasa por parámetros.
+        # La idea es que se puedan determinar por escuela, por curso, por división, etc., manteniendo la referencia de Alumno_ID
+        # y renombrando las columnas de acuerdo a los parámetros suministrados.    
+        # Realizando la fusión de los dataframes.
+        dF_desempeño = pd.merge(dF_dataFrameIzquierdo, dF_dataFrameDerecha, how="left", on=mergeOnColumn)    
+        # Renombrando las columnas 'Alumno_ID_x' y 'Alumno_ID_y' según los parámetros suministrados, asumiendo que ambas columnas contienen los mismos valores.
+        # Esto implica que se puede mantener solo una de estas columnas para evitar duplicados.
+        dF_desempeño.rename(columns={'Alumno_ID_x': ColumnaX, 'Alumno_ID_y': ColumnaY}, inplace=True)
+        # Calculando el porcentaje de desempeño.
+        dF_desempeño[col_titulo] = dF_desempeño[ColumnaY] / dF_desempeño[ColumnaX] * 100    
+        # Opcional: Si se desea eliminar una de las columnas de Alumno_ID para evitar redundancia, puedes descomentar la siguiente línea:
+        # dF_desempeño.drop(columns=[ColumnaY], inplace=True)
+        return dF_desempeño

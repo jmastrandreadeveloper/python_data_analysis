@@ -1,0 +1,337 @@
+Supervisión;CURSO_NORMALIZADO;Total_Alumnos_por_Supervisión_CURSO_NORMALIZADO;DESEMPEÑO;Total_Alumnos_por_Tipo_de_Desempeño;Desempeño_por_Supervisión_CURSO_NORMALIZADO
+01 - Primario;2°;608;Avanzado;45;7.4
+01 - Primario;2°;608;Básico;145;23.85
+01 - Primario;2°;608;Crítico;357;58.72
+01 - Primario;2°;608;Medio;61;10.03
+01 - Primario;3°;737;Avanzado;141;19.13
+01 - Primario;3°;737;Básico;189;25.64
+01 - Primario;3°;737;Crítico;245;33.24
+01 - Primario;3°;737;Medio;162;21.98
+01 - Primario;4°;635;Avanzado;153;24.09
+01 - Primario;4°;635;Básico;157;24.72
+01 - Primario;4°;635;Crítico;128;20.16
+01 - Primario;4°;635;Medio;197;31.02
+01 - Primario;5°;588;Avanzado;79;13.44
+01 - Primario;5°;588;Básico;152;25.85
+01 - Primario;5°;588;Crítico;182;30.95
+01 - Primario;5°;588;Medio;175;29.76
+01 - Primario;6°;694;Avanzado;178;25.65
+01 - Primario;6°;694;Básico;136;19.6
+01 - Primario;6°;694;Crítico;101;14.55
+01 - Primario;6°;694;Medio;279;40.2
+01 - Primario;7°;622;Avanzado;119;19.13
+01 - Primario;7°;622;Básico;133;21.38
+01 - Primario;7°;622;Crítico;95;15.27
+01 - Primario;7°;622;Medio;275;44.21
+01 - Primario Privada;2°;874;Avanzado;122;13.96
+01 - Primario Privada;2°;874;Básico;277;31.69
+01 - Primario Privada;2°;874;Crítico;300;34.32
+01 - Primario Privada;2°;874;Medio;175;20.02
+01 - Primario Privada;3°;950;Avanzado;342;36.0
+01 - Primario Privada;3°;950;Básico;198;20.84
+01 - Primario Privada;3°;950;Crítico;109;11.47
+01 - Primario Privada;3°;950;Medio;301;31.68
+01 - Primario Privada;4°;913;Avanzado;380;41.62
+01 - Primario Privada;4°;913;Básico;166;18.18
+01 - Primario Privada;4°;913;Crítico;91;9.97
+01 - Primario Privada;4°;913;Medio;276;30.23
+01 - Primario Privada;5°;934;Avanzado;250;26.77
+01 - Primario Privada;5°;934;Básico;218;23.34
+01 - Primario Privada;5°;934;Crítico;119;12.74
+01 - Primario Privada;5°;934;Medio;347;37.15
+01 - Primario Privada;6°;892;Avanzado;433;48.54
+01 - Primario Privada;6°;892;Básico;91;10.2
+01 - Primario Privada;6°;892;Crítico;64;7.17
+01 - Primario Privada;6°;892;Medio;304;34.08
+01 - Primario Privada;7°;969;Avanzado;276;28.48
+01 - Primario Privada;7°;969;Básico;165;17.03
+01 - Primario Privada;7°;969;Crítico;73;7.53
+01 - Primario Privada;7°;969;Medio;455;46.96
+01 - Secundario Orientado;1°;1250;Avanzado;141;11.28
+01 - Secundario Orientado;1°;1250;Básico;286;22.88
+01 - Secundario Orientado;1°;1250;Crítico;298;23.84
+01 - Secundario Orientado;1°;1250;Medio;525;42.0
+01 - Secundario Orientado;2°;1173;Avanzado;118;10.06
+01 - Secundario Orientado;2°;1173;Básico;299;25.49
+01 - Secundario Orientado;2°;1173;Crítico;437;37.25
+01 - Secundario Orientado;2°;1173;Medio;319;27.2
+01 - Secundario Orientado;3°;1168;Avanzado;82;7.02
+01 - Secundario Orientado;3°;1168;Básico;236;20.21
+01 - Secundario Orientado;3°;1168;Crítico;605;51.8
+01 - Secundario Orientado;3°;1168;Medio;245;20.98
+01 - Secundario Orientado;4°;991;Avanzado;85;8.58
+01 - Secundario Orientado;4°;991;Básico;244;24.62
+01 - Secundario Orientado;4°;991;Crítico;388;39.15
+01 - Secundario Orientado;4°;991;Medio;274;27.65
+01 - Secundario Orientado;5°;857;Avanzado;66;7.7
+01 - Secundario Orientado;5°;857;Básico;252;29.4
+01 - Secundario Orientado;5°;857;Crítico;340;39.67
+01 - Secundario Orientado;5°;857;Medio;199;23.22
+01 - Secundario Orientado Privada;1°;1155;Avanzado;197;17.06
+01 - Secundario Orientado Privada;1°;1155;Básico;176;15.24
+01 - Secundario Orientado Privada;1°;1155;Crítico;70;6.06
+01 - Secundario Orientado Privada;1°;1155;Medio;712;61.65
+01 - Secundario Orientado Privada;2°;1175;Avanzado;253;21.53
+01 - Secundario Orientado Privada;2°;1175;Básico;277;23.57
+01 - Secundario Orientado Privada;2°;1175;Crítico;127;10.81
+01 - Secundario Orientado Privada;2°;1175;Medio;518;44.09
+01 - Secundario Orientado Privada;3°;1039;Avanzado;163;15.69
+01 - Secundario Orientado Privada;3°;1039;Básico;251;24.16
+01 - Secundario Orientado Privada;3°;1039;Crítico;200;19.25
+01 - Secundario Orientado Privada;3°;1039;Medio;425;40.9
+01 - Secundario Orientado Privada;4°;947;Avanzado;149;15.73
+01 - Secundario Orientado Privada;4°;947;Básico;246;25.98
+01 - Secundario Orientado Privada;4°;947;Crítico;124;13.09
+01 - Secundario Orientado Privada;4°;947;Medio;428;45.2
+01 - Secundario Orientado Privada;5°;919;Avanzado;81;8.81
+01 - Secundario Orientado Privada;5°;919;Básico;308;33.51
+01 - Secundario Orientado Privada;5°;919;Crítico;137;14.91
+01 - Secundario Orientado Privada;5°;919;Medio;393;42.76
+01 - Secundario Técnico;1°;1697;Avanzado;191;11.26
+01 - Secundario Técnico;1°;1697;Básico;381;22.45
+01 - Secundario Técnico;1°;1697;Crítico;327;19.27
+01 - Secundario Técnico;1°;1697;Medio;798;47.02
+01 - Secundario Técnico;2°;1700;Avanzado;134;7.88
+01 - Secundario Técnico;2°;1700;Básico;457;26.88
+01 - Secundario Técnico;2°;1700;Crítico;624;36.71
+01 - Secundario Técnico;2°;1700;Medio;485;28.53
+01 - Secundario Técnico;3°;1563;Avanzado;115;7.36
+01 - Secundario Técnico;3°;1563;Básico;272;17.4
+01 - Secundario Técnico;3°;1563;Crítico;785;50.22
+01 - Secundario Técnico;3°;1563;Medio;391;25.02
+01 - Secundario Técnico;4°;1130;Avanzado;91;8.05
+01 - Secundario Técnico;4°;1130;Básico;308;27.26
+01 - Secundario Técnico;4°;1130;Crítico;398;35.22
+01 - Secundario Técnico;4°;1130;Medio;333;29.47
+01 - Secundario Técnico;5°;1006;Avanzado;32;3.18
+01 - Secundario Técnico;5°;1006;Básico;308;30.62
+01 - Secundario Técnico;5°;1006;Crítico;432;42.94
+01 - Secundario Técnico;5°;1006;Medio;234;23.26
+01 - Secundario Técnico;6°;829;Avanzado;34;4.1
+01 - Secundario Técnico;6°;829;Básico;174;20.99
+01 - Secundario Técnico;6°;829;Crítico;304;36.67
+01 - Secundario Técnico;6°;829;Medio;317;38.24
+02 - Primario;2°;776;Avanzado;63;8.12
+02 - Primario;2°;776;Básico;186;23.97
+02 - Primario;2°;776;Crítico;445;57.35
+02 - Primario;2°;776;Medio;82;10.57
+02 - Primario;3°;785;Avanzado;156;19.87
+02 - Primario;3°;785;Básico;215;27.39
+02 - Primario;3°;785;Crítico;236;30.06
+02 - Primario;3°;785;Medio;178;22.68
+02 - Primario;4°;752;Avanzado;193;25.66
+02 - Primario;4°;752;Básico;163;21.68
+02 - Primario;4°;752;Crítico;138;18.35
+02 - Primario;4°;752;Medio;258;34.31
+02 - Primario;5°;760;Avanzado;138;18.16
+02 - Primario;5°;760;Básico;190;25.0
+02 - Primario;5°;760;Crítico;187;24.61
+02 - Primario;5°;760;Medio;245;32.24
+02 - Primario;6°;748;Avanzado;231;30.88
+02 - Primario;6°;748;Básico;124;16.58
+02 - Primario;6°;748;Crítico;95;12.7
+02 - Primario;6°;748;Medio;298;39.84
+02 - Primario;7°;784;Avanzado;155;19.77
+02 - Primario;7°;784;Básico;168;21.43
+02 - Primario;7°;784;Crítico;128;16.33
+02 - Primario;7°;784;Medio;333;42.47
+02 - Primario Privada;2°;656;Avanzado;53;8.08
+02 - Primario Privada;2°;656;Básico;220;33.54
+02 - Primario Privada;2°;656;Crítico;285;43.45
+02 - Primario Privada;2°;656;Medio;98;14.94
+02 - Primario Privada;3°;652;Avanzado;163;25.0
+02 - Primario Privada;3°;652;Básico;196;30.06
+02 - Primario Privada;3°;652;Crítico;107;16.41
+02 - Primario Privada;3°;652;Medio;186;28.53
+02 - Primario Privada;4°;585;Avanzado;204;34.87
+02 - Primario Privada;4°;585;Básico;113;19.32
+02 - Primario Privada;4°;585;Crítico;79;13.5
+02 - Primario Privada;4°;585;Medio;189;32.31
+02 - Primario Privada;5°;664;Avanzado;130;19.58
+02 - Primario Privada;5°;664;Básico;159;23.95
+02 - Primario Privada;5°;664;Crítico;135;20.33
+02 - Primario Privada;5°;664;Medio;240;36.14
+02 - Primario Privada;6°;594;Avanzado;214;36.03
+02 - Primario Privada;6°;594;Básico;84;14.14
+02 - Primario Privada;6°;594;Crítico;49;8.25
+02 - Primario Privada;6°;594;Medio;247;41.58
+02 - Primario Privada;7°;630;Avanzado;142;22.54
+02 - Primario Privada;7°;630;Básico;115;18.25
+02 - Primario Privada;7°;630;Crítico;80;12.7
+02 - Primario Privada;7°;630;Medio;293;46.51
+02 - Secundario Orientado;1°;739;Avanzado;43;5.82
+02 - Secundario Orientado;1°;739;Básico;214;28.96
+02 - Secundario Orientado;1°;739;Crítico;159;21.52
+02 - Secundario Orientado;1°;739;Medio;323;43.71
+02 - Secundario Orientado;2°;692;Avanzado;52;7.51
+02 - Secundario Orientado;2°;692;Básico;231;33.38
+02 - Secundario Orientado;2°;692;Crítico;246;35.55
+02 - Secundario Orientado;2°;692;Medio;163;23.55
+02 - Secundario Orientado;3°;640;Avanzado;43;6.72
+02 - Secundario Orientado;3°;640;Básico;168;26.25
+02 - Secundario Orientado;3°;640;Crítico;292;45.62
+02 - Secundario Orientado;3°;640;Medio;137;21.41
+02 - Secundario Orientado;4°;559;Avanzado;29;5.19
+02 - Secundario Orientado;4°;559;Básico;180;32.2
+02 - Secundario Orientado;4°;559;Crítico;194;34.7
+02 - Secundario Orientado;4°;559;Medio;156;27.91
+02 - Secundario Orientado;5°;495;Avanzado;38;7.68
+02 - Secundario Orientado;5°;495;Básico;159;32.12
+02 - Secundario Orientado;5°;495;Crítico;171;34.55
+02 - Secundario Orientado;5°;495;Medio;127;25.66
+02 - Secundario Orientado Privada;1°;631;Avanzado;134;21.24
+02 - Secundario Orientado Privada;1°;631;Básico;73;11.57
+02 - Secundario Orientado Privada;1°;631;Crítico;66;10.46
+02 - Secundario Orientado Privada;1°;631;Medio;358;56.74
+02 - Secundario Orientado Privada;2°;619;Avanzado;165;26.66
+02 - Secundario Orientado Privada;2°;619;Básico;144;23.26
+02 - Secundario Orientado Privada;2°;619;Crítico;93;15.02
+02 - Secundario Orientado Privada;2°;619;Medio;217;35.06
+02 - Secundario Orientado Privada;3°;609;Avanzado;170;27.91
+02 - Secundario Orientado Privada;3°;609;Básico;94;15.44
+02 - Secundario Orientado Privada;3°;609;Crítico;111;18.23
+02 - Secundario Orientado Privada;3°;609;Medio;234;38.42
+02 - Secundario Orientado Privada;4°;602;Avanzado;137;22.76
+02 - Secundario Orientado Privada;4°;602;Básico;139;23.09
+02 - Secundario Orientado Privada;4°;602;Crítico;86;14.29
+02 - Secundario Orientado Privada;4°;602;Medio;240;39.87
+02 - Secundario Orientado Privada;5°;513;Avanzado;100;19.49
+02 - Secundario Orientado Privada;5°;513;Básico;131;25.54
+02 - Secundario Orientado Privada;5°;513;Crítico;103;20.08
+02 - Secundario Orientado Privada;5°;513;Medio;179;34.89
+02 - Secundario Técnico;1°;1648;Avanzado;146;8.86
+02 - Secundario Técnico;1°;1648;Básico;385;23.36
+02 - Secundario Técnico;1°;1648;Crítico;355;21.54
+02 - Secundario Técnico;1°;1648;Medio;762;46.24
+02 - Secundario Técnico;2°;1614;Avanzado;165;10.22
+02 - Secundario Técnico;2°;1614;Básico;458;28.38
+02 - Secundario Técnico;2°;1614;Crítico;532;32.96
+02 - Secundario Técnico;2°;1614;Medio;459;28.44
+02 - Secundario Técnico;3°;1559;Avanzado;104;6.67
+02 - Secundario Técnico;3°;1559;Básico;329;21.1
+02 - Secundario Técnico;3°;1559;Crítico;769;49.33
+02 - Secundario Técnico;3°;1559;Medio;357;22.9
+02 - Secundario Técnico;4°;1145;Avanzado;42;3.67
+02 - Secundario Técnico;4°;1145;Básico;341;29.78
+02 - Secundario Técnico;4°;1145;Crítico;521;45.5
+02 - Secundario Técnico;4°;1145;Medio;241;21.05
+02 - Secundario Técnico;5°;927;Avanzado;41;4.42
+02 - Secundario Técnico;5°;927;Básico;315;33.98
+02 - Secundario Técnico;5°;927;Crítico;380;40.99
+02 - Secundario Técnico;5°;927;Medio;191;20.6
+02 - Secundario Técnico;6°;755;Avanzado;35;4.64
+02 - Secundario Técnico;6°;755;Básico;193;25.56
+02 - Secundario Técnico;6°;755;Crítico;356;47.15
+02 - Secundario Técnico;6°;755;Medio;171;22.65
+03 - Primario;2°;847;Avanzado;18;2.13
+03 - Primario;2°;847;Básico;136;16.06
+03 - Primario;2°;847;Crítico;630;74.38
+03 - Primario;2°;847;Medio;63;7.44
+03 - Primario;3°;802;Avanzado;91;11.35
+03 - Primario;3°;802;Básico;232;28.93
+03 - Primario;3°;802;Crítico;346;43.14
+03 - Primario;3°;802;Medio;133;16.58
+03 - Primario;4°;792;Avanzado;90;11.36
+03 - Primario;4°;792;Básico;226;28.54
+03 - Primario;4°;792;Crítico;273;34.47
+03 - Primario;4°;792;Medio;203;25.63
+03 - Primario;5°;732;Avanzado;43;5.87
+03 - Primario;5°;732;Básico;174;23.77
+03 - Primario;5°;732;Crítico;390;53.28
+03 - Primario;5°;732;Medio;125;17.08
+03 - Primario;6°;733;Avanzado;103;14.05
+03 - Primario;6°;733;Básico;184;25.1
+03 - Primario;6°;733;Crítico;192;26.19
+03 - Primario;6°;733;Medio;254;34.65
+03 - Primario;7°;787;Avanzado;70;8.89
+03 - Primario;7°;787;Básico;223;28.34
+03 - Primario;7°;787;Crítico;233;29.61
+03 - Primario;7°;787;Medio;261;33.16
+03 - Primario Privada;2°;883;Avanzado;124;14.04
+03 - Primario Privada;2°;883;Básico;347;39.3
+03 - Primario Privada;2°;883;Crítico;203;22.99
+03 - Primario Privada;2°;883;Medio;209;23.67
+03 - Primario Privada;3°;889;Avanzado;325;36.56
+03 - Primario Privada;3°;889;Básico;188;21.15
+03 - Primario Privada;3°;889;Crítico;69;7.76
+03 - Primario Privada;3°;889;Medio;307;34.53
+03 - Primario Privada;4°;856;Avanzado;376;43.93
+03 - Primario Privada;4°;856;Básico;127;14.84
+03 - Primario Privada;4°;856;Crítico;59;6.89
+03 - Primario Privada;4°;856;Medio;294;34.35
+03 - Primario Privada;5°;862;Avanzado;227;26.33
+03 - Primario Privada;5°;862;Básico;192;22.27
+03 - Primario Privada;5°;862;Crítico;94;10.9
+03 - Primario Privada;5°;862;Medio;349;40.49
+03 - Primario Privada;6°;781;Avanzado;373;47.76
+03 - Primario Privada;6°;781;Básico;65;8.32
+03 - Primario Privada;6°;781;Crítico;41;5.25
+03 - Primario Privada;6°;781;Medio;302;38.67
+03 - Primario Privada;7°;826;Avanzado;216;26.15
+03 - Primario Privada;7°;826;Básico;123;14.89
+03 - Primario Privada;7°;826;Crítico;75;9.08
+03 - Primario Privada;7°;826;Medio;412;49.88
+03 - Secundario Orientado;1°;1380;Avanzado;192;13.91
+03 - Secundario Orientado;1°;1380;Básico;293;21.23
+03 - Secundario Orientado;1°;1380;Crítico;469;33.99
+03 - Secundario Orientado;1°;1380;Medio;426;30.87
+03 - Secundario Orientado;2°;1361;Avanzado;139;10.21
+03 - Secundario Orientado;2°;1361;Básico;391;28.73
+03 - Secundario Orientado;2°;1361;Crítico;526;38.65
+03 - Secundario Orientado;2°;1361;Medio;305;22.41
+03 - Secundario Orientado;3°;1333;Avanzado;195;14.63
+03 - Secundario Orientado;3°;1333;Básico;248;18.6
+03 - Secundario Orientado;3°;1333;Crítico;708;53.11
+03 - Secundario Orientado;3°;1333;Medio;182;13.65
+03 - Secundario Orientado;4°;1113;Avanzado;230;20.66
+03 - Secundario Orientado;4°;1113;Básico;267;23.99
+03 - Secundario Orientado;4°;1113;Crítico;454;40.79
+03 - Secundario Orientado;4°;1113;Medio;162;14.56
+03 - Secundario Orientado;5°;1001;Avanzado;171;17.08
+03 - Secundario Orientado;5°;1001;Básico;244;24.38
+03 - Secundario Orientado;5°;1001;Crítico;445;44.46
+03 - Secundario Orientado;5°;1001;Medio;141;14.09
+03 - Secundario Orientado Privada;1°;1009;Avanzado;223;22.1
+03 - Secundario Orientado Privada;1°;1009;Básico;140;13.88
+03 - Secundario Orientado Privada;1°;1009;Crítico;56;5.55
+03 - Secundario Orientado Privada;1°;1009;Medio;590;58.47
+03 - Secundario Orientado Privada;2°;988;Avanzado;248;25.1
+03 - Secundario Orientado Privada;2°;988;Básico;229;23.18
+03 - Secundario Orientado Privada;2°;988;Crítico;119;12.04
+03 - Secundario Orientado Privada;2°;988;Medio;392;39.68
+03 - Secundario Orientado Privada;3°;990;Avanzado;238;24.04
+03 - Secundario Orientado Privada;3°;990;Básico;162;16.36
+03 - Secundario Orientado Privada;3°;990;Crítico;212;21.41
+03 - Secundario Orientado Privada;3°;990;Medio;378;38.18
+03 - Secundario Orientado Privada;4°;851;Avanzado;202;23.74
+03 - Secundario Orientado Privada;4°;851;Básico;156;18.33
+03 - Secundario Orientado Privada;4°;851;Crítico;119;13.98
+03 - Secundario Orientado Privada;4°;851;Medio;374;43.95
+03 - Secundario Orientado Privada;5°;824;Avanzado;175;21.24
+03 - Secundario Orientado Privada;5°;824;Básico;231;28.03
+03 - Secundario Orientado Privada;5°;824;Crítico;146;17.72
+03 - Secundario Orientado Privada;5°;824;Medio;272;33.01
+03 - Secundario Técnico;1°;1705;Avanzado;204;11.96
+03 - Secundario Técnico;1°;1705;Básico;396;23.23
+03 - Secundario Técnico;1°;1705;Crítico;282;16.54
+03 - Secundario Técnico;1°;1705;Medio;823;48.27
+03 - Secundario Técnico;2°;1673;Avanzado;193;11.54
+03 - Secundario Técnico;2°;1673;Básico;467;27.91
+03 - Secundario Técnico;2°;1673;Crítico;416;24.87
+03 - Secundario Técnico;2°;1673;Medio;597;35.68
+03 - Secundario Técnico;3°;1473;Avanzado;133;9.03
+03 - Secundario Técnico;3°;1473;Básico;377;25.59
+03 - Secundario Técnico;3°;1473;Crítico;512;34.76
+03 - Secundario Técnico;3°;1473;Medio;451;30.62
+03 - Secundario Técnico;4°;1289;Avanzado;122;9.46
+03 - Secundario Técnico;4°;1289;Básico;419;32.51
+03 - Secundario Técnico;4°;1289;Crítico;326;25.29
+03 - Secundario Técnico;4°;1289;Medio;422;32.74
+03 - Secundario Técnico;5°;997;Avanzado;51;5.12
+03 - Secundario Técnico;5°;997;Básico;340;34.1
+03 - Secundario Técnico;5°;997;Crítico;307;30.79
+03 - Secundario Técnico;5°;997;Medio;299;29.99
+03 - Secundario Técnico;6°;564;Avanzado;125;22.16
+03 - Secundario Técnico;6°;564;Básico;136;24.11
+03 - Secundario Técnico;6°;564;Crítico;158;28.01
+03 - Secundario Técnico;6°;564;Medio;145;25.71

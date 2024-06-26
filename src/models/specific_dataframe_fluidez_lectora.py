@@ -2,112 +2,236 @@ import pandas as pd
 from .abstract_dataframe import AbstractDataFrame
 
 class SpecificDataFrameFluidezLectora(AbstractDataFrame):  
-    
     def __init__(self, dataframe: pd.DataFrame):
-        super().__init__(dataframe)        
-        self.transform_data()
+        super().__init__(dataframe)  
         self.group_data()
-        self.clean_data()
-    
-    def transform_data(self):
-        self.calcular_desempeño_por_alumno()
-        self.reordenar_columnas()
-    
-    def calcular_desempeño_por_alumno(self):
-        self.dataframe['DESEMPEÑO'] = self.dataframe.apply(self.determinar_desempeño_por_fila, axis=1)
-
-    def determinar_desempeño_por_fila(self, row):
-        criterios = {
-            'Primario': {
-                '2°': [(0, 15, 'Crítico'), (16, 45, 'Básico'), (46, 70, 'Medio'), (70, float('inf'), 'Avanzado')],
-                '3°': [(0, 30, 'Crítico'), (31, 60, 'Básico'), (61, 90, 'Medio'), (90, float('inf'), 'Avanzado')],
-                '4°': [(0, 45, 'Crítico'), (46, 75, 'Básico'), (76, 110, 'Medio'), (110, float('inf'), 'Avanzado')],
-                '5°': [(0, 60, 'Crítico'), (61, 90, 'Básico'), (91, 125, 'Medio'), (125, float('inf'), 'Avanzado')],
-                '6°': [(0, 75, 'Crítico'), (76, 105, 'Básico'), (106, 140, 'Medio'), (140, float('inf'), 'Avanzado')],
-                '7°': [(0, 85, 'Crítico'), (86, 115, 'Básico'), (116, 155, 'Medio'), (155, float('inf'), 'Avanzado')]
-            },
-            'Secundario Orientado': {
-                '1°': [(0, 95, 'Crítico'), (96, 125, 'Básico'), (126, 165, 'Medio'), (165, float('inf'), 'Avanzado')],
-                '2°': [(0, 105, 'Crítico'), (106, 135, 'Básico'), (136, 170, 'Medio'), (170, float('inf'), 'Avanzado')],
-                '3°': [(0, 115, 'Crítico'), (116, 145, 'Básico'), (146, 175, 'Medio'), (175, float('inf'), 'Avanzado')],
-                '4°': [(0, 120, 'Crítico'), (121, 150, 'Básico'), (151, 180, 'Medio'), (180, float('inf'), 'Avanzado')],
-                '5°': [(0, 125, 'Crítico'), (126, 155, 'Básico'), (156, 185, 'Medio'), (185, float('inf'), 'Avanzado')],
-                '6°': [(0, 125, 'Crítico'), (126, 155, 'Básico'), (156, 185, 'Medio'), (185, float('inf'), 'Avanzado')]
-            }
-        }
-        curso = row['CURSO_NORMALIZADO']
-        nivel = row['Nivel']
-        palabras = row['Cantidad_de_palabras']
-        
-        if nivel in criterios and curso in criterios[nivel]:
-            for min_val, max_val, desempeño in criterios[nivel][curso]:
-                if min_val <= palabras <= max_val:
-                    return desempeño
-        return 'Desconocido'  # Caso por defecto si no se encuentra un criterio coincidente
-    
-    def reordenar_columnas(self):
-        columnas_ordenadas = [
-            'DESEMPEÑO', 'Alumno_ID', 'Operativo', 'CURSO_NORMALIZADO', 'Curso', 'División', 'Ausente',
-            'Cantidad_de_palabras', 'Prosodia', 'Incluido', 'Turno', 'Modalidad', 'Nivel', 'Gestión',
-            'Supervisión', 'Escuela_ID', 'Departamento', 'Localidad', 'zona', 'Regional', 'ciclo_lectivo', 'separador'
-        ]
-        self.dataframe = self.dataframe.reindex(columns=columnas_ordenadas)
+        self.clean_data()    
     
     def group_data(self):
-        self.df_Desempeño_por_Escuela = self.calcular_desempeño(
+        self.df_Desempeño_por_Escuela = self.transformar_y_calcular_porcentaje_desempeño(
             ['Escuela_ID'],
-            self.agrupar_por_criterio(self.dataframe , ['Escuela_ID'], {'Alumno_ID': 'count'} , True),
-            self.agrupar_por_criterio(self.dataframe , ['Escuela_ID', 'DESEMPEÑO'], {'Alumno_ID': 'count'} , True),
+            self.agrupar_por_criterio(self.dataframe , ['Escuela_ID'], {'Alumno_ID': 'count'} , True , 'Total_Alumnos_por_Escuela_ID'),
+            self.agrupar_por_criterio(self.dataframe , ['Escuela_ID', 'DESEMPEÑO'], {'Alumno_ID': 'count'} , True , 'Total_Alumnos_por_Tipo_de_Desempeño'),
             'Total_Alumnos_por_Tipo_de_Desempeño',
-            'Total_Alumnos_por_Escuela_ID',    
+            'Total_Alumnos_por_Escuela_ID',
             'Desempeño_por_Escuela'
         )
         
-        self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO = self.calcular_desempeño(
+        self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO = self.transformar_y_calcular_porcentaje_desempeño(
             ['Escuela_ID', 'CURSO_NORMALIZADO'],
-            self.agrupar_por_criterio(self.dataframe , ['Escuela_ID', 'CURSO_NORMALIZADO'], {'Alumno_ID': 'count'} , True),
-            self.agrupar_por_criterio(self.dataframe , ['Escuela_ID', 'CURSO_NORMALIZADO', 'DESEMPEÑO'], {'Alumno_ID': 'count'} , True),
+            self.agrupar_por_criterio(self.dataframe , ['Escuela_ID', 'CURSO_NORMALIZADO'], {'Alumno_ID': 'count'} , True , 'Total_Alumnos_por_Escuela_ID_y_CURSO_NORMALIZADO'),
+            self.agrupar_por_criterio(self.dataframe , ['Escuela_ID', 'CURSO_NORMALIZADO', 'DESEMPEÑO'], {'Alumno_ID': 'count'} , True , 'Total_Alumnos_por_Tipo_de_Desempeño'),
             'Total_Alumnos_por_Tipo_de_Desempeño',
             'Total_Alumnos_por_Escuela_ID_y_CURSO_NORMALIZADO',    
             'Desempeño_por_Escuela_CURSO_NORMALIZADO'
         )
 
-        self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division = self.calcular_desempeño(
+        self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division = self.transformar_y_calcular_porcentaje_desempeño(
             ['Escuela_ID','CURSO_NORMALIZADO','División'],
-            self.agrupar_por_criterio(self.dataframe , ['Escuela_ID','CURSO_NORMALIZADO','División'], {'Alumno_ID':'count'} , True),
-            self.agrupar_por_criterio(self.dataframe , ['Escuela_ID','CURSO_NORMALIZADO','División','DESEMPEÑO'],{'Alumno_ID':'count'}, True),
+            self.agrupar_por_criterio(self.dataframe , ['Escuela_ID','CURSO_NORMALIZADO','División'], {'Alumno_ID':'count'} , True , 'Total_Alumnos_por_Escuela_ID_CURSO_NORMALIZADO_y_División'),
+            self.agrupar_por_criterio(self.dataframe , ['Escuela_ID','CURSO_NORMALIZADO','División','DESEMPEÑO'],{'Alumno_ID':'count'}, True , 'Total_Alumnos_por_Tipo_de_Desempeño'),
             'Total_Alumnos_por_Tipo_de_Desempeño',
             'Total_Alumnos_por_Escuela_ID_CURSO_NORMALIZADO_y_División',    
             'Desempeño_por_Escuela_CURSO_NORMALIZADO_Division'
         )
+
+        self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO = self.transformar_y_calcular_porcentaje_desempeño(
+            ['Nivel_Unificado','CURSO_NORMALIZADO'],
+            self.agrupar_por_criterio(self.dataframe , ['Nivel_Unificado','CURSO_NORMALIZADO'], {'Alumno_ID':'count'}, True , 'Total_Alumnos_por_Nivel_CURSO_NORMALIZADO'),
+            self.agrupar_por_criterio(self.dataframe , ['Nivel_Unificado','CURSO_NORMALIZADO','DESEMPEÑO'], {'Alumno_ID':'count'}, True , 'Total_Alumnos_por_Tipo_de_Desempeño'),
+            'Total_Alumnos_por_Tipo_de_Desempeño',
+            'Total_Alumnos_por_Nivel_CURSO_NORMALIZADO',    
+            'Desempeño_por_Nivel_CURSO_NORMALIZADO'
+        )
+
+        self.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO = self.transformar_y_calcular_porcentaje_desempeño(
+            ['Supervisión','CURSO_NORMALIZADO'],
+            self.agrupar_por_criterio(self.dataframe , ['Supervisión','CURSO_NORMALIZADO'], {'Alumno_ID':'count'}, True , 'Total_Alumnos_por_Supervisión_CURSO_NORMALIZADO'),
+            self.agrupar_por_criterio(self.dataframe , ['Supervisión','CURSO_NORMALIZADO','DESEMPEÑO'], {'Alumno_ID':'count'}, True , 'Total_Alumnos_por_Tipo_de_Desempeño'),
+            'Total_Alumnos_por_Tipo_de_Desempeño',
+            'Total_Alumnos_por_Supervisión_CURSO_NORMALIZADO',    
+            'Desempeño_por_Supervisión_CURSO_NORMALIZADO'
+        )
     
     def clean_data(self):
-        self.df_Desempeño_por_Escuela['Total_Alumnos_por_Tipo_de_Desempeño'] = self.df_Desempeño_por_Escuela[
-            'Total_Alumnos_por_Tipo_de_Desempeño'].astype(int).round(0)
-        self.df_Desempeño_por_Escuela['Desempeño_por_Escuela'] = self.df_Desempeño_por_Escuela[
-            'Desempeño_por_Escuela'].round(2).fillna(0)
-        self.df_Desempeño_por_Escuela['Total_Alumnos_por_Escuela_ID'] = self.df_Desempeño_por_Escuela[
-            'Total_Alumnos_por_Escuela_ID'].astype(int).round(0).fillna(0)
+        def clean_dataframe(df, int_columns, float_columns):
+            for col in int_columns:
+                df[col] = df[col].astype(int).round(0).fillna(0)
+            for col in float_columns:
+                df[col] = df[col].round(2).fillna(0)
         
-        # acá faltan más lineas
-        self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO['Total_Alumnos_por_Tipo_de_Desempeño'] = self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO[
-            'Total_Alumnos_por_Tipo_de_Desempeño'].astype(int).round(0)
+        clean_dataframe(
+            self.df_Desempeño_por_Escuela,
+            ['Total_Alumnos_por_Tipo_de_Desempeño', 'Total_Alumnos_por_Escuela_ID'],
+            ['Desempeño_por_Escuela']
+        )
+
+        clean_dataframe(
+            self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO,
+            ['Total_Alumnos_por_Tipo_de_Desempeño'],
+            ['Desempeño_por_Escuela_CURSO_NORMALIZADO']
+        )
+
+        clean_dataframe(
+            self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division,
+            ['Total_Alumnos_por_Escuela_ID_CURSO_NORMALIZADO_y_División'],
+            ['Desempeño_por_Escuela_CURSO_NORMALIZADO_Division']
+        )
+
+        clean_dataframe(
+            self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO,
+            ['Total_Alumnos_por_Nivel_CURSO_NORMALIZADO', 'Total_Alumnos_por_Tipo_de_Desempeño'],
+            ['Desempeño_por_Nivel_CURSO_NORMALIZADO']
+        )
+
+        clean_dataframe(
+            self.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO,
+            ['Total_Alumnos_por_Tipo_de_Desempeño', 'Total_Alumnos_por_Supervisión_CURSO_NORMALIZADO'],
+            ['Desempeño_por_Supervisión_CURSO_NORMALIZADO']
+        )
+
+    def filter_data(self):
+        return
+
+
+
+# import pandas as pd
+# from .abstract_dataframe import AbstractDataFrame
+
+# class SpecificDataFrameFluidezLectora(AbstractDataFrame):  
+    
+#     def __init__(self, dataframe: pd.DataFrame):
+#         super().__init__(dataframe)  
+#         self.group_data()
+#         self.clean_data()    
+    
+#     def group_data(self):
+#         self.df_Desempeño_por_Escuela = self.transformar_y_calcular_porcentaje_desempeño(
+#             ['Escuela_ID'],
+#             self.agrupar_por_criterio(self.dataframe , ['Escuela_ID'], {'Alumno_ID': 'count'} , True , 'Total_Alumnos_por_Escuela_ID'),
+#             self.agrupar_por_criterio(self.dataframe , ['Escuela_ID', 'DESEMPEÑO'], {'Alumno_ID': 'count'} , True , 'Total_Alumnos_por_Tipo_de_Desempeño'),
+#             'Total_Alumnos_por_Tipo_de_Desempeño',
+#             'Total_Alumnos_por_Escuela_ID'
+#             'Desempeño_por_Escuela'
+#         )
+        
+#         self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO = self.transformar_y_calcular_porcentaje_desempeño(
+#             ['Escuela_ID', 'CURSO_NORMALIZADO'],
+#             self.agrupar_por_criterio(self.dataframe , ['Escuela_ID', 'CURSO_NORMALIZADO'], {'Alumno_ID': 'count'} , True , 'Total_Alumnos_por_Escuela_ID_y_CURSO_NORMALIZADO'),
+#             self.agrupar_por_criterio(self.dataframe , ['Escuela_ID', 'CURSO_NORMALIZADO', 'DESEMPEÑO'], {'Alumno_ID': 'count'} , True , 'Total_Alumnos_por_Tipo_de_Desempeño'),
+#             'Total_Alumnos_por_Tipo_de_Desempeño',
+#             'Total_Alumnos_por_Escuela_ID_y_CURSO_NORMALIZADO',    
+#             'Desempeño_por_Escuela_CURSO_NORMALIZADO'
+#         )
+
+#         self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division = self.transformar_y_calcular_porcentaje_desempeño(
+#             ['Escuela_ID','CURSO_NORMALIZADO','División'],
+#             self.agrupar_por_criterio(self.dataframe , ['Escuela_ID','CURSO_NORMALIZADO','División'], {'Alumno_ID':'count'} , True , 'Total_Alumnos_por_Escuela_ID_CURSO_NORMALIZADO_y_División'),
+#             self.agrupar_por_criterio(self.dataframe , ['Escuela_ID','CURSO_NORMALIZADO','División','DESEMPEÑO'],{'Alumno_ID':'count'}, True , 'Total_Alumnos_por_Tipo_de_Desempeño'),
+#             'Total_Alumnos_por_Tipo_de_Desempeño',
+#             'Total_Alumnos_por_Escuela_ID_CURSO_NORMALIZADO_y_División',    
+#             'Desempeño_por_Escuela_CURSO_NORMALIZADO_Division'
+#         )
+
+#         self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO = self.transformar_y_calcular_porcentaje_desempeño(
+#             ['Nivel_Unificado','CURSO_NORMALIZADO'],
+#             self.agrupar_por_criterio(self.dataframe , ['Nivel_Unificado','CURSO_NORMALIZADO'], {'Alumno_ID':'count'}, True , 'Total_Alumnos_por_Nivel_CURSO_NORMALIZADO'),
+#             self.agrupar_por_criterio(self.dataframe , ['Nivel_Unificado','CURSO_NORMALIZADO','DESEMPEÑO'], {'Alumno_ID':'count'}, True , 'Total_Alumnos_por_Tipo_de_Desempeño'),
+#             'Total_Alumnos_por_Tipo_de_Desempeño',
+#             'Total_Alumnos_por_Nivel_CURSO_NORMALIZADO',    
+#             'Desempeño_por_Nivel_CURSO_NORMALIZADO'
+#         )
+
+#         self.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO = self.transformar_y_calcular_porcentaje_desempeño(
+#             ['Supervisión','CURSO_NORMALIZADO'],
+#             self.agrupar_por_criterio(self.dataframe , ['Supervisión','CURSO_NORMALIZADO'], {'Alumno_ID':'count'}, True , 'Total_Alumnos_por_Supervisión_CURSO_NORMALIZADO'),
+#             self.agrupar_por_criterio(self.dataframe , ['Supervisión','CURSO_NORMALIZADO','DESEMPEÑO'], {'Alumno_ID':'count'}, True , 'Total_Alumnos_por_Tipo_de_Desempeño'),
+#             'Total_Alumnos_por_Tipo_de_Desempeño',
+#             'Total_Alumnos_por_Supervisión_CURSO_NORMALIZADO',    
+#             'Desempeño_por_Supervisión_CURSO_NORMALIZADO'
+#         )
+    
+#     def clean_data(self):
+#         self.df_Desempeño_por_Escuela['Total_Alumnos_por_Tipo_de_Desempeño'] = self.df_Desempeño_por_Escuela[
+#             'Total_Alumnos_por_Tipo_de_Desempeño'].astype(int).round(0)
+#         self.df_Desempeño_por_Escuela['Desempeño_por_Escuela'] = self.df_Desempeño_por_Escuela[
+#             'Desempeño_por_Escuela'].round(2).fillna(0)
+#         self.df_Desempeño_por_Escuela['Total_Alumnos_por_Escuela_ID'] = self.df_Desempeño_por_Escuela[
+#             'Total_Alumnos_por_Escuela_ID'].astype(int).round(0).fillna(0)
+        
+#         self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO[
+#             'Total_Alumnos_por_Tipo_de_Desempeño'] = self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO[
+#                 'Total_Alumnos_por_Tipo_de_Desempeño'].astype(int).round(0)
+#         # reducir la cantidad de decimales
+#         self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO[
+#             'Desempeño_por_Escuela_CURSO_NORMALIZADO'] = self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO[
+#                 'Desempeño_por_Escuela_CURSO_NORMALIZADO'].round(2)
+#         self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO[
+#             'Total_Alumnos_por_Tipo_de_Desempeño'] = self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO[
+#                 'Total_Alumnos_por_Tipo_de_Desempeño'].fillna(0)
+#         self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO[
+#             'Desempeño_por_Escuela_CURSO_NORMALIZADO'] = self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO[
+#                 'Desempeño_por_Escuela_CURSO_NORMALIZADO'].fillna(0)
         
 
-        # convierto en int la columna Total_Alumnos_por_Tipo_de_Desempeño
-        self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division[
-            'Total_Alumnos_por_Escuela_ID_CURSO_NORMALIZADO_y_División'] = self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division[
-                'Total_Alumnos_por_Escuela_ID_CURSO_NORMALIZADO_y_División'].astype(int).round(0)
-        # reducir la cantidad de decimales
-        self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division[
-            'Desempeño_por_Escuela_CURSO_NORMALIZADO_Division'] = self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division[
-                'Desempeño_por_Escuela_CURSO_NORMALIZADO_Division'].round(2)
-        self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division[
-            'Total_Alumnos_por_Escuela_ID_CURSO_NORMALIZADO_y_División'] = self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division[
-                'Total_Alumnos_por_Escuela_ID_CURSO_NORMALIZADO_y_División'].fillna(0)
-        self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division[
-            'Desempeño_por_Escuela_CURSO_NORMALIZADO_Division'] = self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division[
-                'Desempeño_por_Escuela_CURSO_NORMALIZADO_Division'].fillna(0)
+#         # convierto en int la columna Total_Alumnos_por_Tipo_de_Desempeño
+#         self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division[
+#             'Total_Alumnos_por_Escuela_ID_CURSO_NORMALIZADO_y_División'] = self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division[
+#                 'Total_Alumnos_por_Escuela_ID_CURSO_NORMALIZADO_y_División'].astype(int).round(0)
+#         # reducir la cantidad de decimales
+#         self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division[
+#             'Desempeño_por_Escuela_CURSO_NORMALIZADO_Division'] = self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division[
+#                 'Desempeño_por_Escuela_CURSO_NORMALIZADO_Division'].round(2)
+#         self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division[
+#             'Total_Alumnos_por_Escuela_ID_CURSO_NORMALIZADO_y_División'] = self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division[
+#                 'Total_Alumnos_por_Escuela_ID_CURSO_NORMALIZADO_y_División'].fillna(0)
+#         self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division[
+#             'Desempeño_por_Escuela_CURSO_NORMALIZADO_Division'] = self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division[
+#                 'Desempeño_por_Escuela_CURSO_NORMALIZADO_Division'].fillna(0)
+        
+
+#         self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO[
+#         'Total_Alumnos_por_Nivel_CURSO_NORMALIZADO'] = self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO[
+#             'Total_Alumnos_por_Nivel_CURSO_NORMALIZADO'].astype(int).round(0)
+#         self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO[
+#             'Total_Alumnos_por_Nivel_CURSO_NORMALIZADO'] = self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO[
+#                 'Total_Alumnos_por_Nivel_CURSO_NORMALIZADO'].fillna(0)
+
+#         self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO[
+#             'Total_Alumnos_por_Tipo_de_Desempeño'] = self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO[
+#                 'Total_Alumnos_por_Tipo_de_Desempeño'].astype(int).round(0)
+#         self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO[
+#             'Total_Alumnos_por_Tipo_de_Desempeño'] = self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO[
+#                 'Total_Alumnos_por_Tipo_de_Desempeño'].fillna(0)
+        
+#         self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO[
+#             'Desempeño_por_Nivel_CURSO_NORMALIZADO'] = self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO[
+#                 'Desempeño_por_Nivel_CURSO_NORMALIZADO'].round(2)    
+#         self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO[
+#             'Desempeño_por_Nivel_CURSO_NORMALIZADO'] = self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO[
+#                 'Desempeño_por_Nivel_CURSO_NORMALIZADO'].fillna(0)
+        
+
+#         self.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO[
+#         'Total_Alumnos_por_Tipo_de_Desempeño'] = self.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO[
+#             'Total_Alumnos_por_Tipo_de_Desempeño'].astype(int).round(0)
+#         self.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO[
+#             'Total_Alumnos_por_Supervisión_CURSO_NORMALIZADO'] = self.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO[
+#                 'Total_Alumnos_por_Supervisión_CURSO_NORMALIZADO'].fillna(0)
+
+#         self.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO[
+#             'Total_Alumnos_por_Supervisión_CURSO_NORMALIZADO'] = self.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO[
+#                 'Total_Alumnos_por_Supervisión_CURSO_NORMALIZADO'].astype(int).round(0)
+#         self.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO[
+#             'Total_Alumnos_por_Supervisión_CURSO_NORMALIZADO'] = self.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO[
+#                 'Total_Alumnos_por_Supervisión_CURSO_NORMALIZADO'].fillna(0)
+        
+#         self.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO[
+#             'Desempeño_por_Supervisión_CURSO_NORMALIZADO'] = self.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO[
+#                 'Desempeño_por_Supervisión_CURSO_NORMALIZADO'].round(2)    
+#         self.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO[
+#             'Desempeño_por_Supervisión_CURSO_NORMALIZADO'] = self.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO[
+#                 'Desempeño_por_Supervisión_CURSO_NORMALIZADO'].fillna(0)
 
 
 # import pandas as pd

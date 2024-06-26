@@ -42,7 +42,7 @@ Estas líneas importan funciones y clases específicas
 (cleaning.py, transformation.py, validation.py y preprocessor.py) dentro del mismo paquete.
 """
 from .cleaning import clean_data
-from .transformation import transform_data
+from .transformation import transform_data_fluidez_lectora
 from .validation import validate_data
 from .preprocessor import Preprocessor  # Asegúrate de que esta línea esté presente y correctamente definida en preprocessing/__init__.py
 
@@ -51,4 +51,4 @@ La variable __all__ es una lista de cadenas que define los nombres de los módul
 clases y funciones que serán exportados cuando se realice una importación del tipo from <package> import *. 
 En este caso, solo clean_data, transform_data y validate_data serán accesibles con esta forma de importación.
 """
-__all__ = ['clean_data', 'transform_data', 'validate_data']
+__all__ = ['clean_data', 'transform_data_fluidez_lectora', 'validate_data']

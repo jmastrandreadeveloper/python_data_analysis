@@ -1,3 +1,7 @@
+import os
+import sys
+
+
 from src.data_loading import DataLoader
 from src.preprocessing import clean_data, transform_data_fluidez_lectora, validate_data
 from src.analysis import Analyzer
@@ -7,12 +11,28 @@ from PIL import Image  # Asegúrate de que tienes Pillow instalado
 from src.models.specific_dataframe import SpecificDataFrame
 from src.models.specific_dataframe_fluidez_lectora import SpecificDataFrameFluidezLectora
 
-from src.myModels.fluidez_lectora_1.a_prepocessor import Preprocessor
-from src.myModels.fluidez_lectora_1.b_agg import Agg
-from src.myModels.fluidez_lectora_1.b_group import Group
-from src.myModels.fluidez_lectora_1.c_filter import Filter
+from src.my_models.fluidez_lectora_1.a_prepocessor import Preprocessor
+from src.my_models.fluidez_lectora_1.b_agg import Agg
+from src.my_models.fluidez_lectora_1.b_group import Group
+from src.my_models.fluidez_lectora_1.c_filter import Filter
 
 def main():
+
+    # Agregar el directorio raíz del proyecto al sys.path
+    sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src'))
+
+    from generator import generate_concrete_classes
+
+    # Directorio de salida para las clases concretas
+    output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src/my_models_')
+
+    # Generar clases concretas
+    generate_concrete_classes(output_dir , 'fluidez_lectora_1')
+
+
+
+
+
     print("Asegurando directorios necesarios...")
     ensure_dir('data/processed')
     ensure_dir('data/processed/images')

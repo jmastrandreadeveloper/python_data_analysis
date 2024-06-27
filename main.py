@@ -5,8 +5,12 @@ from src.reports import ReporteFluidezLectora_1_PorEscuela
 from src.utils import ensure_dir, save_dataframe_to_csv, obtener_datos_de_columna , save_image
 from PIL import Image  # Asegúrate de que tienes Pillow instalado
 from src.models.specific_dataframe import SpecificDataFrame
-from src.models.specific_dataframe_fluidez_lectora import SpecificDataFrameFluidezLectora 
+from src.models.specific_dataframe_fluidez_lectora import SpecificDataFrameFluidezLectora
 
+from src.myModels.fluidez_lectora_1.a_prepocessor import Preprocessor
+from src.myModels.fluidez_lectora_1.b_agg import Agg
+from src.myModels.fluidez_lectora_1.b_group import Group
+from src.myModels.fluidez_lectora_1.c_filter import Filter
 
 def main():
     print("Asegurando directorios necesarios...")
@@ -19,7 +23,30 @@ def main():
     dfnom = loader.load_csv()
 
     loader = DataLoader('Fluidez Lectora 1.csv')
-    df_FluidezLectora_1 = loader.load_csv()    
+    df_FluidezLectora_1 = loader.load_csv()
+
+
+    ############################### experimento ##################################
+    # Preproceso de fl 1
+    fl_1_processed = Preprocessor(df_FluidezLectora_1)
+    c = fl_1_processed.cleaning_data()
+    t = fl_1_processed.transform_data()
+    v = fl_1_processed.validate_data()
+    f = fl_1_processed.filter_data()
+    print(c , ' ' , t , ' ' , v , ' ' , f , ' ' ,)
+    # Agrupado de fl 1
+    fl_1_groupped = Group(fl_1_processed)
+    g = fl_1_groupped.group_data()
+    print(g)
+    # Agregado
+    fl_1_agregado = Agg(fl_1_groupped)
+    a = fl_1_agregado.agg_data()
+    print(a)
+    # Filtrado
+    fl_1_filtrado = Filter(fl_1_agregado)
+    fi = fl_1_filtrado.filter_data()
+    print(fi)
+    ############################# fin experimento ################################
 
     print("Preprocesando datos...")
     # Preprocesamiento de datos

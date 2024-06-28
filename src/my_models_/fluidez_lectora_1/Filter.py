@@ -1,10 +1,10 @@
-from AbstractGroup import AbstractGroup
+from src.abstract_model.AbstractFilter import AbstractFilter
 import pandas as pd
 
-class ConcreteAbstractGroup(AbstractGroup):
+class Filter(AbstractFilter):
     def __init__(self, dataframe: pd.DataFrame):
         super().__init__(dataframe)
 
-    def group_data(self):
+    def filter_data(self):
         pass
 

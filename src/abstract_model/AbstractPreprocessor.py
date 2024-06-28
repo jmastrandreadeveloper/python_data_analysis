@@ -20,3 +20,6 @@ class AbstractPreprocessor(ABC):
     @abstractmethod
     def validate_data(self):
         pass
+
+    def método_concreto(self):
+        print('este es un método concreto')

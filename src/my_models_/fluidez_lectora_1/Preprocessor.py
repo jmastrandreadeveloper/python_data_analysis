@@ -1,7 +1,7 @@
-from AbstractPreprocessor import AbstractPreprocessor
+from src.abstract_model.AbstractPreprocessor import AbstractPreprocessor
 import pandas as pd
 
-class ConcreteAbstractPreprocessor(AbstractPreprocessor):
+class Preprocessor(AbstractPreprocessor):
     def __init__(self, dataframe: pd.DataFrame):
         super().__init__(dataframe)
 

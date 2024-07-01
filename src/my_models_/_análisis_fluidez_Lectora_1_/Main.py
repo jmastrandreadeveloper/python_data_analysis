@@ -24,7 +24,9 @@ class Main(AbstractMain):
         # calcular desempeño por alumno, crear columna DESEMPEÑO
         self.transform.calcular_DESEMPEÑO_por_Alumno_ID()
         # agrupar dataframe por criterios
-        # 
+        #
+        self.group_agg.groupby()
+        print(self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count)
 
         
 

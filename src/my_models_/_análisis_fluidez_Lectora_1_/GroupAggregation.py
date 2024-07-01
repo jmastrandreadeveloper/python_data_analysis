@@ -14,3 +14,6 @@ class GroupAggregation(AbstractGroupAggregation):
     def pivot_table(self, *args, **kwargs):
         pass
 
+    def agrupar_a(self , columnas , func):
+        # acá le mandamos las columnas para que se sepa qué vamos a agrupar
+        return

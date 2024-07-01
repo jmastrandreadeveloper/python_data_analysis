@@ -2,24 +2,38 @@ from abc import ABC, abstractmethod
 import pandas as pd
 
 class AbstractPreprocessor(ABC):
+
     def __init__(self, dataframe: pd.DataFrame):
         self.dataframe = dataframe
 
     @abstractmethod
-    def cleaning_data(self):
+    def isnull(self):
         pass
 
     @abstractmethod
-    def filter_data(self):
+    def notnull(self):
         pass
 
     @abstractmethod
-    def transform_data(self):
+    def fillna(self, value):
         pass
 
     @abstractmethod
-    def validate_data(self):
+    def dropna(self):
         pass
 
-    def método_concreto(self):
-        print('este es un método concreto')
+    @abstractmethod
+    def drop(self, columns, axis):
+        pass
+
+    @abstractmethod
+    def rename(self, columns):
+        pass
+
+    @abstractmethod
+    def sort_values(self, by):
+        pass
+
+    @abstractmethod
+    def sort_index(self):
+        pass

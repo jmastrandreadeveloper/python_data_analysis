@@ -5,11 +5,26 @@ import pandas       as pd
 import csv
 import json
 import numpy
+import sys
 
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data'))
 
 print('BASE_DIR ' , BASE_DIR)
+
+
+
+
+def create_folder_tree(folder_name):
+    #sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src/my_models_'))
+    from generator import generate_concrete_classes
+    # Directorio de salida para las clases concretas
+    output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'my_models_')
+    generate_concrete_classes(output_dir , folder_name)    
+    return
+
+def imprime(algo):
+    print(algo)
 
 def save_dataframe_to_csv(dataframe, filepath):
     try:
@@ -32,6 +47,26 @@ def save_dataframe_to_csv(dataframe, filepath):
         
         print('..archivo ', filepath ,' grabado..!')
     return
+
+def save_json(diccionario, filepath):
+    """
+    Función para grabar un diccionario en un archivo JSON.
+
+    :param diccionario: Diccionario a grabar.
+    :param nombre_archivo: Nombre del archivo de destino.
+    """
+    try:
+        # Abriendo el archivo en modo escritura.
+        with open(filepath, 'w', encoding='utf-8') as archivo:
+            # Serializando el diccionario y escribiéndolo en el archivo.
+            json.dump(diccionario, archivo, indent=4, ensure_ascii=False, default=default_converter)
+        print(f"Archivo '{filepath}' grabado con éxito.")
+    except TypeError as e:
+        # Manejo de errores si hay algún problema durante la serialización.
+        print(f"Error al grabar el archivo: {e}")
+    except Exception as e:
+        # Manejo de cualquier otro error.
+        print(f"Ocurrió un error: {e}")
     
 def quitar_retorno_de_columnas(dataframe):
     # Quitar '\r' de los nombres de las columnas

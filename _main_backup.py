@@ -8,8 +8,8 @@ from src.analysis import Analyzer
 from src.reports import ReporteFluidezLectora_1_PorEscuela
 from src.utils import ensure_dir, save_dataframe_to_csv, obtener_datos_de_columna , save_image
 from PIL import Image  # Asegúrate de que tienes Pillow instalado
-from src.models.specific_dataframe import SpecificDataFrame
-from src.models.specific_dataframe_fluidez_lectora import SpecificDataFrameFluidezLectora
+from src.NoBorrar_models.specific_dataframe import SpecificDataFrame
+from src.NoBorrar_models.specific_dataframe_fluidez_lectora import SpecificDataFrameFluidezLectora
 
 from src.my_models.fluidez_lectora_1.a_prepocessor import Preprocessor
 from src.my_models.fluidez_lectora_1.b_agg import Agg

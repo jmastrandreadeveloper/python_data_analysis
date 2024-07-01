@@ -8,10 +8,3 @@ class Report(AbstractReport):
     def do_report(self, *args, **kwargs):
         pass
 
-    def func(self):
-        dic = {
-            'a' : 10,
-            'b' : 20
-        }
-        print('acá va el reporte' ,  dic)
-

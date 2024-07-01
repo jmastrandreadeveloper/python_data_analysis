@@ -20,19 +20,9 @@ def main():
     
     from src.my_models_._nominal_para_fluidez_Lectora_1_ import Main as mNom
     nom = mNom(dfnom)
-
-    
-    
-    
     
     from src.my_models_._análisis_fluidez_Lectora_1_ import Main as mFL1
     fl1 = mFL1(df_FluidezLectora_1)
-    
-
-    
-    
-
-
 
     return
 

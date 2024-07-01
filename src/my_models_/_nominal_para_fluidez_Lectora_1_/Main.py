@@ -32,7 +32,7 @@ class Main(AbstractMain):
         # reordenar columnas
         self.dataframe = self.preprocessor.reordenar_columnas(
             [
-                'ciclo_lectivo','Alumno_ID','Sexo','Edad','CURSO_NORMALIZADO','Curso','División','Turno','Modalidad','Nivel','Nivel_Unificado','Gestión','Supervisión','Escuela_ID','Departamento','Localidad','zona','AMBITO','Regional']
+                'ciclo_lectivo','Alumno_ID','Sexo','Edad','Edad_Correcta','CURSO_NORMALIZADO','Curso','División','Turno','Modalidad','Nivel','Nivel_Unificado','Gestión','Supervisión','Escuela_ID','Departamento','Localidad','zona','AMBITO','Regional']
         )
         print(self.dataframe.columns)
         pass

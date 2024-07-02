@@ -6,14 +6,15 @@ from src.generator_groups import generate_group_aggregation_class
 class GroupAggregation(AbstractGroupAggregation):
     def __init__(self, dataframe: pd.DataFrame):
         super().__init__(dataframe)
-        ### 1 -autogenero los grupos
+        ### 1 -autogenero los grupos para fluidez
         print('1... generando grupos' )
         group_params_list = [
-            (['Escuela_ID', 'CURSO_NORMALIZADO'], {'Alumno_ID': 'count'},{'reset_index': True}),
-            (['Escuela_ID','CURSO_NORMALIZADO','División'], {'Alumno_ID': 'count'},{'reset_index': False}),
-            (['Nivel','CURSO_NORMALIZADO','División'], {'Alumno_ID': 'count'},{'reset_index': True}),
-            (['Escuela_ID', 'CURSO_NORMALIZADO','DESEMPEÑO'], {'Alumno_ID': 'count'},{'reset_index': True}),
-            (['Escuela_ID', 'DESEMPEÑO'], {'Alumno_ID': 'count'},{'reset_index': True}),
+            (['Escuela_ID','DESEMPEÑO'],{'Alumno_ID':'count'},{'reset_index': True}),
+            (['Escuela_ID','CURSO_NORMALIZADO','DESEMPEÑO'], {'Alumno_ID':'count'},{'reset_index': True}),
+            (['Escuela_ID','CURSO_NORMALIZADO','División','DESEMPEÑO'],{'Alumno_ID':'count'},{'reset_index': True}),
+
+            (['Nivel_Unificado','CURSO_NORMALIZADO','DESEMPEÑO'],{'Alumno_ID':'count'},{'reset_index': True}),
+            (['Supervisión','CURSO_NORMALIZADO','DESEMPEÑO'],{'Alumno_ID':'count'}, {'reset_index': True}),
         ]
         generate_group_aggregation_class(group_params_list , os.path.dirname(os.path.abspath(__file__)))
 
@@ -32,28 +33,7 @@ class GroupAggregation(AbstractGroupAggregation):
         pass
 
     def pivot_table(self, *args, **kwargs):
-        pass
-    
-    def df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count(self):
-        if all(col in self.dataframe.columns for col in ['Escuela_ID', 'CURSO_NORMALIZADO']):
-            result = self.dataframe.groupby(['Escuela_ID', 'CURSO_NORMALIZADO']).agg({'Alumno_ID': 'count'})
-            return result.reset_index()
-        else:
-            raise ValueError('Las columnas especificadas no existen en el dataframe')
-
-    def df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count(self):
-        if all(col in self.dataframe.columns for col in ['Escuela_ID', 'CURSO_NORMALIZADO', 'División']):
-            result = self.dataframe.groupby(['Escuela_ID', 'CURSO_NORMALIZADO', 'División']).agg({'Alumno_ID': 'count'})
-            return result
-        else:
-            raise ValueError('Las columnas especificadas no existen en el dataframe')
-
-    def df_Nivel_CURSO_NORMALIZADO_División_Alumno_ID_count(self):
-        if all(col in self.dataframe.columns for col in ['Nivel', 'CURSO_NORMALIZADO', 'División']):
-            result = self.dataframe.groupby(['Nivel', 'CURSO_NORMALIZADO', 'División']).agg({'Alumno_ID': 'count'})
-            return result.reset_index()
-        else:
-            raise ValueError('Las columnas especificadas no existen en el dataframe')
+        pass    
 
     def df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count(self):
         if all(col in self.dataframe.columns for col in ['Escuela_ID', 'CURSO_NORMALIZADO', 'DESEMPEÑO']):
@@ -65,6 +45,27 @@ class GroupAggregation(AbstractGroupAggregation):
     def df_Escuela_ID_DESEMPEÑO_Alumno_ID_count(self):
         if all(col in self.dataframe.columns for col in ['Escuela_ID', 'DESEMPEÑO']):
             result = self.dataframe.groupby(['Escuela_ID', 'DESEMPEÑO']).agg({'Alumno_ID': 'count'})
+            return result.reset_index()
+        else:
+            raise ValueError('Las columnas especificadas no existen en el dataframe')
+
+    def df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count(self):
+        if all(col in self.dataframe.columns for col in ['Escuela_ID', 'CURSO_NORMALIZADO', 'División', 'DESEMPEÑO']):
+            result = self.dataframe.groupby(['Escuela_ID', 'CURSO_NORMALIZADO', 'División', 'DESEMPEÑO']).agg({'Alumno_ID': 'count'})
+            return result.reset_index()
+        else:
+            raise ValueError('Las columnas especificadas no existen en el dataframe')
+
+    def df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count(self):
+        if all(col in self.dataframe.columns for col in ['Nivel_Unificado', 'CURSO_NORMALIZADO', 'DESEMPEÑO']):
+            result = self.dataframe.groupby(['Nivel_Unificado', 'CURSO_NORMALIZADO', 'DESEMPEÑO']).agg({'Alumno_ID': 'count'})
+            return result.reset_index()
+        else:
+            raise ValueError('Las columnas especificadas no existen en el dataframe')
+
+    def df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count(self):
+        if all(col in self.dataframe.columns for col in ['Supervisión', 'CURSO_NORMALIZADO', 'DESEMPEÑO']):
+            result = self.dataframe.groupby(['Supervisión', 'CURSO_NORMALIZADO', 'DESEMPEÑO']).agg({'Alumno_ID': 'count'})
             return result.reset_index()
         else:
             raise ValueError('Las columnas especificadas no existen en el dataframe')

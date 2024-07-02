@@ -12,7 +12,6 @@ def main():
     u.create_folder_treeV2('__Nominal_para_fluidez_Lectora_1_')
     u.create_folder_treeV2('__Análisis_Fluidez_Lectora_1_')
 
-
     loader = DataLoader('Nominal.csv')
     dfnom = loader.load_csv()   
 

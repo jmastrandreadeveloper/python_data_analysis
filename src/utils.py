@@ -12,7 +12,13 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data')
 
 print('BASE_DIR ' , BASE_DIR)
 
-
+def create_folder_treeV2(folder_name):
+    #sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src/my_models_'))
+    from generatorV2 import generate_concrete_classesV2
+    # Directorio de salida para las clases concretas
+    output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'my_models_')
+    generate_concrete_classesV2(output_dir , folder_name)
+    return
 
 
 def create_folder_tree(folder_name):

@@ -13,6 +13,7 @@ class GroupAggregation(AbstractGroupAggregation):
             (['Escuela_ID','CURSO_NORMALIZADO','División'], {'Alumno_ID': 'count'},{'reset_index': False}),
             (['Nivel','CURSO_NORMALIZADO','División'], {'Alumno_ID': 'count'},{'reset_index': True}),
             (['Escuela_ID', 'CURSO_NORMALIZADO','DESEMPEÑO'], {'Alumno_ID': 'count'},{'reset_index': True}),
+            (['Escuela_ID', 'DESEMPEÑO'], {'Alumno_ID': 'count'},{'reset_index': True}),
         ]
         generate_group_aggregation_class(group_params_list , os.path.dirname(os.path.abspath(__file__)))
 
@@ -32,10 +33,7 @@ class GroupAggregation(AbstractGroupAggregation):
 
     def pivot_table(self, *args, **kwargs):
         pass
-
-    def agrupar_a(self , columnas , func):
-        # acá le mandamos las columnas para que se sepa qué vamos a agrupar
-        return
+    
     def df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count(self):
         if all(col in self.dataframe.columns for col in ['Escuela_ID', 'CURSO_NORMALIZADO']):
             result = self.dataframe.groupby(['Escuela_ID', 'CURSO_NORMALIZADO']).agg({'Alumno_ID': 'count'})
@@ -60,6 +58,13 @@ class GroupAggregation(AbstractGroupAggregation):
     def df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count(self):
         if all(col in self.dataframe.columns for col in ['Escuela_ID', 'CURSO_NORMALIZADO', 'DESEMPEÑO']):
             result = self.dataframe.groupby(['Escuela_ID', 'CURSO_NORMALIZADO', 'DESEMPEÑO']).agg({'Alumno_ID': 'count'})
+            return result.reset_index()
+        else:
+            raise ValueError('Las columnas especificadas no existen en el dataframe')
+
+    def df_Escuela_ID_DESEMPEÑO_Alumno_ID_count(self):
+        if all(col in self.dataframe.columns for col in ['Escuela_ID', 'DESEMPEÑO']):
+            result = self.dataframe.groupby(['Escuela_ID', 'DESEMPEÑO']).agg({'Alumno_ID': 'count'})
             return result.reset_index()
         else:
             raise ValueError('Las columnas especificadas no existen en el dataframe')

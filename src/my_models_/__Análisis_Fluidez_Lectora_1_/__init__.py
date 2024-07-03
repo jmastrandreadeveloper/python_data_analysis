@@ -5,6 +5,7 @@ from .Preprocessor import Preprocessor
 from .Transform import Transform
 from .Report import Report
 from .Main import Main
+from .CalculadorDePorcentajes import CalculadorDePorcentajes
 
 __all__ = [
     'GroupAggregation',
@@ -12,4 +13,5 @@ __all__ = [
     'Transform',
     'Report',
     'Main',
+    'CalculadorDePorcentajes',
 ]

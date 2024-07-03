@@ -8,25 +8,40 @@ class GroupAggregation(AbstractGroupAggregation):
         super().__init__(dataframe)
         ### 1 -autogenero los grupos para fluidez
         print('1... generando grupos' )
-        group_params_list = [
-            (['Escuela_ID','DESEMPEÑO'],{'Alumno_ID':'count'},{'reset_index': True}),
-            (['Escuela_ID','CURSO_NORMALIZADO','DESEMPEÑO'], {'Alumno_ID':'count'},{'reset_index': True}),
-            (['Escuela_ID','CURSO_NORMALIZADO','División','DESEMPEÑO'],{'Alumno_ID':'count'},{'reset_index': True}),
+        # group_params_list = [
+        #     (['Escuela_ID','DESEMPEÑO'],{'Alumno_ID':'count'},{'reset_index': True}),
+        #     (['Escuela_ID','CURSO_NORMALIZADO','DESEMPEÑO'], {'Alumno_ID':'count'},{'reset_index': True}),
+        #     (['Escuela_ID','CURSO_NORMALIZADO','División','DESEMPEÑO'],{'Alumno_ID':'count'},{'reset_index': True}),
 
-            (['Nivel_Unificado','CURSO_NORMALIZADO','DESEMPEÑO'],{'Alumno_ID':'count'},{'reset_index': True}),
-            (['Supervisión','CURSO_NORMALIZADO','DESEMPEÑO'],{'Alumno_ID':'count'}, {'reset_index': True}),
-        ]
-        generate_group_aggregation_class(group_params_list , os.path.dirname(os.path.abspath(__file__)))
+        #     (['Nivel_Unificado','CURSO_NORMALIZADO','DESEMPEÑO'],{'Alumno_ID':'count'},{'reset_index': True}),
+        #     (['Supervisión','CURSO_NORMALIZADO','DESEMPEÑO'],{'Alumno_ID':'count'}, {'reset_index': True}),
+        # ]
+        # generate_group_aggregation_class(group_params_list , os.path.dirname(os.path.abspath(__file__)))
 
     def groupby(self, *args, **kwargs):
         ### 2 -importar la clase para poder usar los métodos de agrupamientos
         print('2... accediendo a los grupos' )
-        # incluir la clase en el archivo __init__.py de esta carpeta
+        
+        # agrupamientos que salen de la clase abstracta dado que son comunes para los dos dataframes
+        self.df_Escuela_ID_Alumno_ID_count = self.df_Escuela_ID_Alumno_ID_count()
         self.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count()
         self.df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count()
-        self.df_Nivel_CURSO_NORMALIZADO_División_Alumno_ID_count = self.df_Nivel_CURSO_NORMALIZADO_División_Alumno_ID_count()
+        self.df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count = self.df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count()
+        self.df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count = self.df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count()
+        
+        # agrupamiento que son propios de este dataframe de fluidez lectora, estos agruipamientos están
+        # en esta función., más abajo , son los que agrupan el desempeño y nos va a servir para poder
+        # sacar los pocentajes de desempeño
+        self.df_Escuela_ID_DESEMPEÑO_Alumno_ID_count = self.df_Escuela_ID_DESEMPEÑO_Alumno_ID_count()
         self.df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count()
+        self.df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count()
+        self.df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count = self.df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count()
+        self.df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count = self.df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count()
 
+        # ahora tengo que calcular los porcentajes de desempeño...
+        # cuál es el mejor lugar para hacer esa operación..???
+        # la mejor alternativa es la de delegarlo a un objeto que haga ese trabajo
+        # y no usar ninguna de las clases que ya tenemos porque no tienen esa finalidad
         return
 
     def agg(self, *args, **kwargs):
@@ -35,19 +50,19 @@ class GroupAggregation(AbstractGroupAggregation):
     def pivot_table(self, *args, **kwargs):
         pass    
 
-    def df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count(self):
-        if all(col in self.dataframe.columns for col in ['Escuela_ID', 'CURSO_NORMALIZADO', 'DESEMPEÑO']):
-            result = self.dataframe.groupby(['Escuela_ID', 'CURSO_NORMALIZADO', 'DESEMPEÑO']).agg({'Alumno_ID': 'count'})
-            return result.reset_index()
-        else:
-            raise ValueError('Las columnas especificadas no existen en el dataframe')
-
     def df_Escuela_ID_DESEMPEÑO_Alumno_ID_count(self):
         if all(col in self.dataframe.columns for col in ['Escuela_ID', 'DESEMPEÑO']):
             result = self.dataframe.groupby(['Escuela_ID', 'DESEMPEÑO']).agg({'Alumno_ID': 'count'})
             return result.reset_index()
         else:
-            raise ValueError('Las columnas especificadas no existen en el dataframe')
+            raise ValueError('Las columnas especificadas no existen en el dataframe')    
+    
+    def df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count(self):
+        if all(col in self.dataframe.columns for col in ['Escuela_ID', 'CURSO_NORMALIZADO', 'DESEMPEÑO']):
+            result = self.dataframe.groupby(['Escuela_ID', 'CURSO_NORMALIZADO', 'DESEMPEÑO']).agg({'Alumno_ID': 'count'})
+            return result.reset_index()
+        else:
+            raise ValueError('Las columnas especificadas no existen en el dataframe')    
 
     def df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count(self):
         if all(col in self.dataframe.columns for col in ['Escuela_ID', 'CURSO_NORMALIZADO', 'División', 'DESEMPEÑO']):

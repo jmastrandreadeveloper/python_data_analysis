@@ -29,3 +29,10 @@ class Preprocessor(AbstractPreprocessor):
     def sort_index(self, *args, **kwargs):
         pass
 
+    def clean_dataframe(self , dataframe, int_columns, float_columns):
+        for col in int_columns:
+            dataframe[col] = dataframe[col].astype(int).round(0).fillna(0)
+        for col in float_columns:
+            dataframe[col] = dataframe[col].round(2).fillna(0)
+            
+        return dataframe

@@ -43,6 +43,7 @@ class Transform(AbstractTransform):
             'Turno',
             'Modalidad',
             'Nivel',
+            'Nivel_Unificado',
             'Gestión',
             'Supervisión',
             'Escuela_ID',

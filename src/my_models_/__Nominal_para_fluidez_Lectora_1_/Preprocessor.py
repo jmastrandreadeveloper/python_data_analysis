@@ -110,6 +110,7 @@ class Preprocessor(AbstractPreprocessor):
             # reordenar las columnas
             # reordenar columnas
             self.dataframe = self.reordenar_columnas(
+                self.dataframe,
                 [
                     'ciclo_lectivo','Alumno_ID','Sexo','Edad','Edad_Correcta','CURSO_NORMALIZADO','Curso','División','Turno','Modalidad','Nivel','Gestión','Supervisión','Escuela_ID','Departamento','Localidad','zona','AMBITO','Regional',]
             )

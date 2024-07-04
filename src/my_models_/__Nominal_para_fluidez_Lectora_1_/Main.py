@@ -28,9 +28,10 @@ class Main(AbstractMain):
         # obtener la lista de las escuelas a analizar buscando en la columna Escuela_ID y devolviendo una lista de ellas
         self.Escuelas_IDs = self.preprocessor.obtener_datos_de_columna('Escuela_ID' , True)
         # agregar columna Nivel_Unificado    
-        self.preprocessor.agregar_columna_Nivel_Unificado()
+        self.dataframe = self.preprocessor.agregar_columna_Nivel_Unificado()
         # reordenar columnas
         self.dataframe = self.preprocessor.reordenar_columnas(
+            self.dataframe,
             [
                 'ciclo_lectivo','Alumno_ID','Sexo','Edad','Edad_Correcta','CURSO_NORMALIZADO','Curso','División','Turno','Modalidad','Nivel','Nivel_Unificado','Gestión','Supervisión','Escuela_ID','Departamento','Localidad','zona','AMBITO','Regional']
         )

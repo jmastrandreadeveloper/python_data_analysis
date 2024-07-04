@@ -1,4 +1,5 @@
 import pandas as pd
+import utils as u
 from src.my_models_.__Análisis_Fluidez_Lectora_1_.GroupAggregation import GroupAggregation
 from src.my_models_.__Análisis_Fluidez_Lectora_1_.Preprocessor import Preprocessor
 """
@@ -28,6 +29,10 @@ class CalculadorDePorcentajes:
             ['Total_Alumnos_por_Tipo_de_Desempeño','Total_Alumnos_por_Escuela_ID'],
             ['Desempeño_por_Escuela']
         )
+        u.save_dataframe_to_csv(self.df_Desempeño_por_Escuela,'data/processed/transformed/df_Desempeño_por_Escuela.csv')
+
+
+
         # porcentaje de desempeño por escuela y curso normalizado 
         self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO = self.porcentajes_desempeño(
             ['Escuela_ID','CURSO_NORMALIZADO'],
@@ -37,6 +42,13 @@ class CalculadorDePorcentajes:
             'Total_Alumnos_por_Escuela_ID_y_CURSO_NORMALIZADO',
             'Desempeño_por_Escuela_CURSO_NORMALIZADO'
         )
+        # error de agrupamiento en este dataframe self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count
+        u.save_dataframe_to_csv(self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count.csv')
+        u.save_dataframe_to_csv(self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count.csv')
+
+        print(self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO)
+        u.save_dataframe_to_csv(self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO,'data/processed/transformed/df_Desempeño_por_Escuela_CURSO_NORMALIZADO.csv')
+        
         self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO = self.preprocessor.clean_dataframe(
             self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO,
             ['Total_Alumnos_por_Tipo_de_Desempeño','Total_Alumnos_por_Escuela_ID_y_CURSO_NORMALIZADO'],

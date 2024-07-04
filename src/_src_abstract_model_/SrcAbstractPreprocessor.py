@@ -100,19 +100,17 @@ class AbstractPreprocessor(ABC):
         
     # este método es común para los dataframes nominales y de fluidez lectora
     def agregar_columna_Nivel_Unificado(self):
-        # Crear la columna 'Nivel_Unificado' directamente sin usar .insert(), por simplicidad y claridad.
-        self.dataframe['Nivel_Unificado'] = self.dataframe['Nivel']
-        # Cambiar los nombres de los niveles en 'Nivel_Unificado'.
-        self.dataframe['Nivel_Unificado'] = self.dataframe['Nivel_Unificado'].replace({
+        # Crear la columna 'Nivel_Unificado' directamente sin usar .insert(), por simplicidad y claridad.        
+        self.dataframe.loc[:, 'Nivel_Unificado'] = self.dataframe['Nivel'].replace({
             'Secundario Orientado': 'Secundario', 
             'Secundario Técnico': 'Secundario'
-        })        
-        return
-    
-    def reordenar_columnas(self , listaDeColumnas):
-        # reordenar las columnas
-        self.dataframe = self.dataframe[listaDeColumnas]
+        })
         return self.dataframe
+    
+    def reordenar_columnas(self , dataframe , listaDeColumnas):
+        # reordenar las columnas
+        dataframe = dataframe[listaDeColumnas]
+        return dataframe
     
     def filtrar_por_columna(self,columna,condición):
         return self.dataframe[self.dataframe[columna] == condición] 

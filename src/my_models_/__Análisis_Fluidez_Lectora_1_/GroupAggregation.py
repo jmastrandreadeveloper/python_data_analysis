@@ -20,19 +20,19 @@ class GroupAggregation(AbstractGroupAggregation):
     def groupby(self, dataframe: pd.DataFrame):
         self.df_alumnos_con_MÁXIMA_cant_palabras = dataframe
         # agrupamientos que salen de la clase abstracta dado que son comunes para los dos dataframes
-        self.df_Escuela_ID_Alumno_ID_count_ = self.df_Escuela_ID_Alumno_ID_count()
-        self.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count_ = self.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count()
-        self.df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count_ = self.df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count()
-        self.df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count_ = self.df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count()
-        self.df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count_ = self.df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count()        
+        self._df_Escuela_ID_Alumno_ID_count = self.df_Escuela_ID_Alumno_ID_count()
+        self._df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count()
+        self._df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count()
+        self._df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count = self.df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count()
+        self._df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count = self.df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count()        
         # agrupamiento que son propios de este dataframe de fluidez lectora, estos agruipamientos están
         # en esta función., más abajo , son los que agrupan el desempeño y nos va a servir para poder
         # sacar los pocentajes de desempeño
-        self.df_Escuela_ID_DESEMPEÑO_Alumno_ID_count_ = self.df_Escuela_ID_DESEMPEÑO_Alumno_ID_count()        
-        self.df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_ = self.df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count()        
-        self.df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count_ = self.df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count()
-        self.df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_ = self.df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count()
-        self.df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_ = self.df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count()
+        self._df_Escuela_ID_DESEMPEÑO_Alumno_ID_count = self.df_Escuela_ID_DESEMPEÑO_Alumno_ID_count()        
+        self._df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count()        
+        self._df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count()
+        self._df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count = self.df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count()
+        self._df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count = self.df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count()
 
         return
 

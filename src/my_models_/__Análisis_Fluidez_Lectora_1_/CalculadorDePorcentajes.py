@@ -15,75 +15,75 @@ class CalculadorDePorcentajes:
     def calcular_porcentajes_desempeño(self):
         print('calculando porcentajes de desempeño')
         # porcentaje de desempeño por escuela
-        self.df_Desempeño_por_Escuela = self.porcentajes_desempeño(
+        self._df_Desempeño_por_Escuela = self.porcentajes_desempeño(
             ['Escuela_ID'],
-            self.group_agg.df_Escuela_ID_Alumno_ID_count_,
-            self.group_agg.df_Escuela_ID_DESEMPEÑO_Alumno_ID_count_,
+            self.group_agg._df_Escuela_ID_Alumno_ID_count,
+            self.group_agg._df_Escuela_ID_DESEMPEÑO_Alumno_ID_count,
             'Total_Alumnos_por_Tipo_de_Desempeño',
             'Total_Alumnos_por_Escuela_ID',
             'Desempeño_por_Escuela'
         )
         # fix las columnas para que queden con valores enteros y los float con dos valores después del punto
-        self.df_Desempeño_por_Escuela = self.preprocessor.clean_dataframe(
-            self.df_Desempeño_por_Escuela,
+        self._df_Desempeño_por_Escuela = self.preprocessor.clean_dataframe(
+            self._df_Desempeño_por_Escuela,
             ['Total_Alumnos_por_Tipo_de_Desempeño','Total_Alumnos_por_Escuela_ID'],
             ['Desempeño_por_Escuela']
         )
 
         # porcentaje de desempeño por escuela y curso normalizado 
-        self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO = self.porcentajes_desempeño(
+        self._df_Desempeño_por_Escuela_CURSO_NORMALIZADO = self.porcentajes_desempeño(
             ['Escuela_ID','CURSO_NORMALIZADO'],
-            self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count_,
-            self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_,
+            self.group_agg._df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count,
+            self.group_agg._df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,
             'Total_Alumnos_por_Tipo_de_Desempeño',
             'Total_Alumnos_por_Escuela_ID_y_CURSO_NORMALIZADO',
             'Desempeño_por_Escuela_CURSO_NORMALIZADO'
         )        
-        self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO = self.preprocessor.clean_dataframe(
-            self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO,
+        self._df_Desempeño_por_Escuela_CURSO_NORMALIZADO = self.preprocessor.clean_dataframe(
+            self._df_Desempeño_por_Escuela_CURSO_NORMALIZADO,
             ['Total_Alumnos_por_Tipo_de_Desempeño','Total_Alumnos_por_Escuela_ID_y_CURSO_NORMALIZADO'],
             ['Desempeño_por_Escuela_CURSO_NORMALIZADO']
         )
 
         # porcentaje de desempeño por escuela curso y división
-        self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division = self.porcentajes_desempeño(
+        self._df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division = self.porcentajes_desempeño(
             ['Escuela_ID','CURSO_NORMALIZADO','División'],
-            self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count_,
-            self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count_,
+            self.group_agg._df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count,
+            self.group_agg._df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count,
             'Total_Alumnos_por_Tipo_de_Desempeño',
             'Total_Alumnos_por_Escuela_ID_CURSO_NORMALIZADO_y_División',
             'Desempeño_por_Escuela_CURSO_NORMALIZADO_Division'
         )
-        self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division = self.preprocessor.clean_dataframe(
-            self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division,
+        self._df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division = self.preprocessor.clean_dataframe(
+            self._df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division,
             ['Total_Alumnos_por_Tipo_de_Desempeño','Total_Alumnos_por_Escuela_ID_CURSO_NORMALIZADO_y_División'],
             ['Desempeño_por_Escuela_CURSO_NORMALIZADO_Division']
         )
         # porcentaje de desempeño por supervisión y curso
-        self.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO = self.porcentajes_desempeño(
+        self._df_Desempeño_por_Supervisión_CURSO_NORMALIZADO = self.porcentajes_desempeño(
             ['Supervisión','CURSO_NORMALIZADO'],
-            self.group_agg.df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count_,
-            self.group_agg.df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_,
+            self.group_agg._df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count,
+            self.group_agg._df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,
             'Total_Alumnos_por_Tipo_de_Desempeño',
             'Total_Alumnos_por_Supervisión_CURSO_NORMALIZADO',
             'Desempeño_por_Supervisión_CURSO_NORMALIZADO'
         )
-        self.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO = self.preprocessor.clean_dataframe(
-            self.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO,
+        self._df_Desempeño_por_Supervisión_CURSO_NORMALIZADO = self.preprocessor.clean_dataframe(
+            self._df_Desempeño_por_Supervisión_CURSO_NORMALIZADO,
             ['Total_Alumnos_por_Tipo_de_Desempeño','Total_Alumnos_por_Supervisión_CURSO_NORMALIZADO'],
             ['Desempeño_por_Supervisión_CURSO_NORMALIZADO']
         )
         # porcentaje de desempeño por nivel y curso
-        self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO = self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO = self.porcentajes_desempeño(
+        self._df_Desempeño_por_Nivel_CURSO_NORMALIZADO = self._df_Desempeño_por_Nivel_CURSO_NORMALIZADO = self.porcentajes_desempeño(
             ['Nivel_Unificado','CURSO_NORMALIZADO'],
-            self.group_agg.df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count_,
-            self.group_agg.df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_,
+            self.group_agg._df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count,
+            self.group_agg._df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,
             'Total_Alumnos_por_Tipo_de_Desempeño',
             'Total_Alumnos_por_Nivel_CURSO_NORMALIZADO',
             'Desempeño_por_Nivel_CURSO_NORMALIZADO'
         )
-        self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO = self.preprocessor.clean_dataframe(
-            self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO,
+        self._df_Desempeño_por_Nivel_CURSO_NORMALIZADO = self.preprocessor.clean_dataframe(
+            self._df_Desempeño_por_Nivel_CURSO_NORMALIZADO,
             ['Total_Alumnos_por_Tipo_de_Desempeño','Total_Alumnos_por_Nivel_CURSO_NORMALIZADO'],
             ['Desempeño_por_Nivel_CURSO_NORMALIZADO']
         )

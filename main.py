@@ -22,9 +22,7 @@ def main():
     nom = mNom(dfnom)
     
     from src.my_models_.__Análisis_Fluidez_Lectora_1_.Main import Main as mFL1
-    fl1 = mFL1(df_FluidezLectora_1)
-
-    
+    fl1 = mFL1(df_FluidezLectora_1)    
 
     return
 

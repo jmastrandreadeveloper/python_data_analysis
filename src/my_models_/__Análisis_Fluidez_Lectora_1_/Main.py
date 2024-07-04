@@ -5,6 +5,7 @@ from src.my_models_._abstract_model_.AbstractMain import AbstractMain
 from .GroupAggregation import GroupAggregation
 from .Preprocessor import Preprocessor
 from .Transform import Transform
+from .Report import Report
 from .CalculadorDePorcentajes import CalculadorDePorcentajes
 
 class Main(AbstractMain):
@@ -54,21 +55,32 @@ class Main(AbstractMain):
         # agrupar dataframe por criterios
         self.group_agg.groupby(df_alumnos_con_MÁXIMA_cant_palabras)
 
-        u.save_dataframe_to_csv(self.group_agg.df_Escuela_ID_Alumno_ID_count_,'data/processed/transformed/df_Escuela_ID_Alumno_ID_count_.csv')
-        u.save_dataframe_to_csv(self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count_,'data/processed/transformed/df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count_.csv') 
-        u.save_dataframe_to_csv(self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count_,'data/processed/transformed/df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count_.csv') 
-        u.save_dataframe_to_csv(self.group_agg.df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count_,'data/processed/transformed/df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count_.csv') 
-        u.save_dataframe_to_csv(self.group_agg.df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count_,'data/processed/transformed/df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count_.csv') 
+        u.save_dataframe_to_csv(self.group_agg._df_Escuela_ID_Alumno_ID_count,'data/processed/transformed/df_Escuela_ID_Alumno_ID_count_.csv')
+        u.save_dataframe_to_csv(self.group_agg._df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count_.csv') 
+        u.save_dataframe_to_csv(self.group_agg._df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count,'data/processed/transformed/df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count_.csv') 
+        u.save_dataframe_to_csv(self.group_agg._df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count_.csv') 
+        u.save_dataframe_to_csv(self.group_agg._df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count_.csv') 
 
-        u.save_dataframe_to_csv(self.group_agg.df_Escuela_ID_DESEMPEÑO_Alumno_ID_count_,'data/processed/transformed/df_Escuela_ID_DESEMPEÑO_Alumno_ID_count_.csv') 
-        u.save_dataframe_to_csv(self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_,'data/processed/transformed/df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_.csv') 
-        u.save_dataframe_to_csv(self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count_,'data/processed/transformed/df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count_.csv') 
-        u.save_dataframe_to_csv(self.group_agg.df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_,'data/processed/transformed/df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_.csv') 
-        u.save_dataframe_to_csv(self.group_agg.df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_,'data/processed/transformed/df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_.csv') 
+        u.save_dataframe_to_csv(self.group_agg._df_Escuela_ID_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/df_Escuela_ID_DESEMPEÑO_Alumno_ID_count_.csv') 
+        u.save_dataframe_to_csv(self.group_agg._df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_.csv') 
+        u.save_dataframe_to_csv(self.group_agg._df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count_.csv') 
+        u.save_dataframe_to_csv(self.group_agg._df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_.csv') 
+        u.save_dataframe_to_csv(self.group_agg._df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_.csv') 
         
         # calcular el porcentaje de desempeño de acuerdo a diferentes criterios
         # creo un objeto para tal fin
         self.calculador = CalculadorDePorcentajes(self.group_agg)
         self.calculador.calcular_porcentajes_desempeño()
+
+        u.save_dataframe_to_csv(self.calculador._df_Desempeño_por_Escuela,'data/processed/transformed/_df_Desempeño_por_Escuela.csv') 
+        u.save_dataframe_to_csv(self.calculador._df_Desempeño_por_Escuela_CURSO_NORMALIZADO,'data/processed/transformed/_df_Desempeño_por_Escuela_CURSO_NORMALIZADO.csv') 
+        u.save_dataframe_to_csv(self.calculador._df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division,'data/processed/transformed/_df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division.csv') 
+        u.save_dataframe_to_csv(self.calculador._df_Desempeño_por_Supervisión_CURSO_NORMALIZADO,'data/processed/transformed/_df_Desempeño_por_Supervisión_CURSO_NORMALIZADO.csv') 
+        u.save_dataframe_to_csv(self.calculador._df_Desempeño_por_Nivel_CURSO_NORMALIZADO,'data/processed/transformed/_df_Desempeño_por_Nivel_CURSO_NORMALIZADO.csv') 
+
+        reporte = Report('algo')
+        reporte.do_report()
+
+
 
         pass

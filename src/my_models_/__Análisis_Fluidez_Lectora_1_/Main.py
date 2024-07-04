@@ -10,8 +10,7 @@ from .CalculadorDePorcentajes import CalculadorDePorcentajes
 class Main(AbstractMain):
 
     def __init__(self, dataframe: pd.DataFrame):
-        super().__init__(dataframe)
-        self.group_agg = GroupAggregation(dataframe)
+        super().__init__(dataframe)        
         self.preprocessor = Preprocessor(dataframe)
         self.transform = Transform(dataframe)
         # acá empiezo con la ejecución 
@@ -51,22 +50,25 @@ class Main(AbstractMain):
 
         u.save_dataframe_to_csv(df_alumnos_con_MÁXIMA_cant_palabras,'data/processed/transformed/df_alumnos_con_MÁXIMA_cant_palabras.csv') 
 
+        self.group_agg = GroupAggregation(df_alumnos_con_MÁXIMA_cant_palabras)
         # agrupar dataframe por criterios
         self.group_agg.groupby(df_alumnos_con_MÁXIMA_cant_palabras)
 
-        
+        u.save_dataframe_to_csv(self.group_agg.df_Escuela_ID_Alumno_ID_count_,'data/processed/transformed/df_Escuela_ID_Alumno_ID_count_.csv')
+        u.save_dataframe_to_csv(self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count_,'data/processed/transformed/df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count_.csv') 
+        u.save_dataframe_to_csv(self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count_,'data/processed/transformed/df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count_.csv') 
+        u.save_dataframe_to_csv(self.group_agg.df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count_,'data/processed/transformed/df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count_.csv') 
+        u.save_dataframe_to_csv(self.group_agg.df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count_,'data/processed/transformed/df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count_.csv') 
+
+        u.save_dataframe_to_csv(self.group_agg.df_Escuela_ID_DESEMPEÑO_Alumno_ID_count_,'data/processed/transformed/df_Escuela_ID_DESEMPEÑO_Alumno_ID_count_.csv') 
+        u.save_dataframe_to_csv(self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_,'data/processed/transformed/df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_.csv') 
+        u.save_dataframe_to_csv(self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count_,'data/processed/transformed/df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count_.csv') 
+        u.save_dataframe_to_csv(self.group_agg.df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_,'data/processed/transformed/df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_.csv') 
+        u.save_dataframe_to_csv(self.group_agg.df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_,'data/processed/transformed/df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_.csv') 
         
         # calcular el porcentaje de desempeño de acuerdo a diferentes criterios
         # creo un objeto para tal fin
         self.calculador = CalculadorDePorcentajes(self.group_agg)
         self.calculador.calcular_porcentajes_desempeño()
-
-        print(self.calculador.df_Desempeño_por_Escuela)
-        print(self.calculador.df_Desempeño_por_Escuela_CURSO_NORMALIZADO)
-        print(self.calculador.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division)
-        print(self.calculador.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO)
-        print(self.calculador.df_Desempeño_por_Nivel_CURSO_NORMALIZADO)
-
-
 
         pass

@@ -17,8 +17,8 @@ class CalculadorDePorcentajes:
         # porcentaje de desempeño por escuela
         self.df_Desempeño_por_Escuela = self.porcentajes_desempeño(
             ['Escuela_ID'],
-            self.group_agg.df_Escuela_ID_Alumno_ID_count,
-            self.group_agg.df_Escuela_ID_DESEMPEÑO_Alumno_ID_count,
+            self.group_agg.df_Escuela_ID_Alumno_ID_count_,
+            self.group_agg.df_Escuela_ID_DESEMPEÑO_Alumno_ID_count_,
             'Total_Alumnos_por_Tipo_de_Desempeño',
             'Total_Alumnos_por_Escuela_ID',
             'Desempeño_por_Escuela'
@@ -29,26 +29,16 @@ class CalculadorDePorcentajes:
             ['Total_Alumnos_por_Tipo_de_Desempeño','Total_Alumnos_por_Escuela_ID'],
             ['Desempeño_por_Escuela']
         )
-        u.save_dataframe_to_csv(self.df_Desempeño_por_Escuela,'data/processed/transformed/df_Desempeño_por_Escuela.csv')
-
-
 
         # porcentaje de desempeño por escuela y curso normalizado 
         self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO = self.porcentajes_desempeño(
             ['Escuela_ID','CURSO_NORMALIZADO'],
-            self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count,
-            self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,
+            self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count_,
+            self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_,
             'Total_Alumnos_por_Tipo_de_Desempeño',
             'Total_Alumnos_por_Escuela_ID_y_CURSO_NORMALIZADO',
             'Desempeño_por_Escuela_CURSO_NORMALIZADO'
-        )
-        # error de agrupamiento en este dataframe self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count
-        u.save_dataframe_to_csv(self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count.csv')
-        u.save_dataframe_to_csv(self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count.csv')
-
-        print(self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO)
-        u.save_dataframe_to_csv(self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO,'data/processed/transformed/df_Desempeño_por_Escuela_CURSO_NORMALIZADO.csv')
-        
+        )        
         self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO = self.preprocessor.clean_dataframe(
             self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO,
             ['Total_Alumnos_por_Tipo_de_Desempeño','Total_Alumnos_por_Escuela_ID_y_CURSO_NORMALIZADO'],
@@ -58,8 +48,8 @@ class CalculadorDePorcentajes:
         # porcentaje de desempeño por escuela curso y división
         self.df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division = self.porcentajes_desempeño(
             ['Escuela_ID','CURSO_NORMALIZADO','División'],
-            self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count,
-            self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count,
+            self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count_,
+            self.group_agg.df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count_,
             'Total_Alumnos_por_Tipo_de_Desempeño',
             'Total_Alumnos_por_Escuela_ID_CURSO_NORMALIZADO_y_División',
             'Desempeño_por_Escuela_CURSO_NORMALIZADO_Division'
@@ -72,8 +62,8 @@ class CalculadorDePorcentajes:
         # porcentaje de desempeño por supervisión y curso
         self.df_Desempeño_por_Supervisión_CURSO_NORMALIZADO = self.porcentajes_desempeño(
             ['Supervisión','CURSO_NORMALIZADO'],
-            self.group_agg.df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count,
-            self.group_agg.df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,
+            self.group_agg.df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count_,
+            self.group_agg.df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_,
             'Total_Alumnos_por_Tipo_de_Desempeño',
             'Total_Alumnos_por_Supervisión_CURSO_NORMALIZADO',
             'Desempeño_por_Supervisión_CURSO_NORMALIZADO'
@@ -86,8 +76,8 @@ class CalculadorDePorcentajes:
         # porcentaje de desempeño por nivel y curso
         self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO = self.df_Desempeño_por_Nivel_CURSO_NORMALIZADO = self.porcentajes_desempeño(
             ['Nivel_Unificado','CURSO_NORMALIZADO'],
-            self.group_agg.df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count,
-            self.group_agg.df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,
+            self.group_agg.df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count_,
+            self.group_agg.df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_,
             'Total_Alumnos_por_Tipo_de_Desempeño',
             'Total_Alumnos_por_Nivel_CURSO_NORMALIZADO',
             'Desempeño_por_Nivel_CURSO_NORMALIZADO'

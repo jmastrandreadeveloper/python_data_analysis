@@ -20,25 +20,20 @@ class GroupAggregation(AbstractGroupAggregation):
     def groupby(self, dataframe: pd.DataFrame):
         self.df_alumnos_con_MÁXIMA_cant_palabras = dataframe
         # agrupamientos que salen de la clase abstracta dado que son comunes para los dos dataframes
-        self.df_Escuela_ID_Alumno_ID_count = self.df_Escuela_ID_Alumno_ID_count()
-        self.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count()
-        self.df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count()
-        self.df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count = self.df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count()
-        self.df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count = self.df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count()
-        
+        self.df_Escuela_ID_Alumno_ID_count_ = self.df_Escuela_ID_Alumno_ID_count()
+        self.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count_ = self.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count()
+        self.df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count_ = self.df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count()
+        self.df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count_ = self.df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count()
+        self.df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count_ = self.df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count()        
         # agrupamiento que son propios de este dataframe de fluidez lectora, estos agruipamientos están
         # en esta función., más abajo , son los que agrupan el desempeño y nos va a servir para poder
         # sacar los pocentajes de desempeño
-        self.df_Escuela_ID_DESEMPEÑO_Alumno_ID_count = self.df_Escuela_ID_DESEMPEÑO_Alumno_ID_count()
-        self.df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count()        
-        self.df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count()
-        self.df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count = self.df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count()
-        self.df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count = self.df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count()
+        self.df_Escuela_ID_DESEMPEÑO_Alumno_ID_count_ = self.df_Escuela_ID_DESEMPEÑO_Alumno_ID_count()        
+        self.df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_ = self.df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count()        
+        self.df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count_ = self.df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count()
+        self.df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_ = self.df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count()
+        self.df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count_ = self.df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count()
 
-        # ahora tengo que calcular los porcentajes de desempeño...
-        # cuál es el mejor lugar para hacer esa operación..???
-        # la mejor alternativa es la de delegarlo a un objeto que haga ese trabajo
-        # y no usar ninguna de las clases que ya tenemos porque no tienen esa finalidad
         return
 
     def agg(self, *args, **kwargs):
@@ -68,8 +63,7 @@ class GroupAggregation(AbstractGroupAggregation):
         else:
             raise ValueError('Las columnas especificadas no existen en el dataframe')
 
-    def df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count(self):
-        print('self.df_alumnos_con_MÁXIMA_cant_palabras.columns ' , self.df_alumnos_con_MÁXIMA_cant_palabras.columns)
+    def df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count(self):        
         if all(col in self.df_alumnos_con_MÁXIMA_cant_palabras.columns for col in ['Nivel_Unificado', 'CURSO_NORMALIZADO', 'DESEMPEÑO']):
             result = self.df_alumnos_con_MÁXIMA_cant_palabras.groupby(['Nivel_Unificado', 'CURSO_NORMALIZADO', 'DESEMPEÑO']).agg({'Alumno_ID': 'count'})
             return result.reset_index()
@@ -82,4 +76,3 @@ class GroupAggregation(AbstractGroupAggregation):
             return result.reset_index()
         else:
             raise ValueError('Las columnas especificadas no existen en el dataframe')
-

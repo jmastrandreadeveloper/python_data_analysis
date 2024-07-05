@@ -4,7 +4,8 @@ from src.my_models_._abstract_model_.AbstractMain import AbstractMain
 from .GroupAggregation import GroupAggregation
 from .Preprocessor import Preprocessor
 from .Transform import Transform
-import utils as u
+from .Report import Report
+import src.utils as u
 
 class Main(AbstractMain):
 
@@ -36,4 +37,9 @@ class Main(AbstractMain):
                 'ciclo_lectivo','Alumno_ID','Sexo','Edad','Edad_Correcta','CURSO_NORMALIZADO','Curso','División','Turno','Modalidad','Nivel','Nivel_Unificado','Gestión','Supervisión','Escuela_ID','Departamento','Localidad','zona','AMBITO','Regional']
         )
         print(self.dataframe.columns)
+        self.reporte()
         pass
+
+    def reporte(self):
+        print('haciendo reporte del Nominal')
+        self.reporteNominal = Report('-')

@@ -1,6 +1,6 @@
 from src.my_models_._abstract_model_.AbstractGroupAggregation import AbstractGroupAggregation
 import pandas as pd
-import os
+import src.utils as u
 from src.generator_groups import generate_group_aggregation_class
 
 class GroupAggregation(AbstractGroupAggregation):
@@ -33,6 +33,8 @@ class GroupAggregation(AbstractGroupAggregation):
         self._df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count()
         self._df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count = self.df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count()
         self._df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count = self.df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count()
+        # guardar los data frames
+        self.salvar_df()        
 
         return
 
@@ -76,3 +78,17 @@ class GroupAggregation(AbstractGroupAggregation):
             return result.reset_index()
         else:
             raise ValueError('Las columnas especificadas no existen en el dataframe')
+        
+    def salvar_df(self):
+        u.save_dataframe_to_csv(self._df_Escuela_ID_Alumno_ID_count,'data/processed/transformed/_df_Escuela_ID_Alumno_ID_count.csv')
+        u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/_df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count,'data/processed/transformed/_df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/_df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/_df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
+
+        u.save_dataframe_to_csv(self._df_Escuela_ID_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/_df_Escuela_ID_DESEMPEÑO_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/_df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/_df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/_df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/_df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count.csv') 
+        

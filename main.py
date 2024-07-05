@@ -3,6 +3,7 @@ import sys
 from src.data_loading import DataLoader
 
 import src.utils as u
+from src.my_models_.__Reporte_Por_Escuela_Análisis_Fluidez_Lectora.ReporteEscuela import ReporteEscuela
 
 # obligatorio para poder acceder a todas las funcionalidades de las librerias para el proyecto y todo lo demas
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src'))
@@ -22,7 +23,10 @@ def main():
     nom = mNom(dfnom)
     
     from src.my_models_.__Análisis_Fluidez_Lectora_1_.Main import Main as mFL1
-    fl1 = mFL1(df_FluidezLectora_1)    
+    fl1 = mFL1(df_FluidezLectora_1)
+
+    ReporteEscuela(nom.reporteNominal,fl1.reporteFluidez).do_report()
+
 
     return
 

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 import pandas as pd
 import json
-import utils as u
+import src.utils as u
 
 """
 Esta clase va a dirigir el reporte.
@@ -49,7 +49,6 @@ class AbstractReport(ABC):
         u.save_json(self.report_data, self.output_path)
 
     def view_report(self):
-        print(self.additional_params[0][0])
-        print(self.additional_params[0][1])
-        print(self.additional_params[0][2])
+        print(self.additional_params[0])
+        print(self.additional_params[1])        
         print(self.report_data)

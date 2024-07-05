@@ -1,5 +1,5 @@
 import pandas as pd
-import utils as u
+import src.utils as u
 from src.my_models_.__Análisis_Fluidez_Lectora_1_.GroupAggregation import GroupAggregation
 from src.my_models_.__Análisis_Fluidez_Lectora_1_.Preprocessor import Preprocessor
 """
@@ -87,6 +87,8 @@ class CalculadorDePorcentajes:
             ['Total_Alumnos_por_Tipo_de_Desempeño','Total_Alumnos_por_Nivel_CURSO_NORMALIZADO'],
             ['Desempeño_por_Nivel_CURSO_NORMALIZADO']
         )
+        # guardar los data frames
+        self.salvar_df()
         pass
 
     def porcentajes_desempeño(self,listaDeColumnas, dF_dataFrameIzquierdo, dF_dataFrameDerecha, ColumnaY, ColumnaX, col_titulo):    
@@ -103,3 +105,10 @@ class CalculadorDePorcentajes:
         # Opcional: Si se desea eliminar una de las columnas de Alumno_ID para evitar redundancia, puedes descomentar la siguiente línea:
         # dF_desempeño.drop(columns=[ColumnaY], inplace=True)
         return dF_desempeño
+    
+    def salvar_df(self):
+        u.save_dataframe_to_csv(self._df_Desempeño_por_Escuela,'data/processed/transformed/_df_Desempeño_por_Escuela.csv')
+        u.save_dataframe_to_csv(self._df_Desempeño_por_Escuela_CURSO_NORMALIZADO,'data/processed/transformed/_df_Desempeño_por_Escuela_CURSO_NORMALIZADO.csv') 
+        u.save_dataframe_to_csv(self._df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division,'data/processed/transformed/_df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division.csv') 
+        u.save_dataframe_to_csv(self._df_Desempeño_por_Supervisión_CURSO_NORMALIZADO,'data/processed/transformed/_df_Desempeño_por_Supervisión_CURSO_NORMALIZADO.csv') 
+        u.save_dataframe_to_csv(self._df_Desempeño_por_Nivel_CURSO_NORMALIZADO,'data/processed/transformed/_df_Desempeño_por_Nivel_CURSO_NORMALIZADO.csv')

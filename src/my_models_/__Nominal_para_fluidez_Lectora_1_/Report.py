@@ -4,6 +4,7 @@ import pandas as pd
 class Report(AbstractReport):
     def __init__(self, output_path, *args):
         super().__init__(output_path, args)
+        self.parametro_Nominal = 10
 
     def do_report(self, *args, **kwargs):
         pass

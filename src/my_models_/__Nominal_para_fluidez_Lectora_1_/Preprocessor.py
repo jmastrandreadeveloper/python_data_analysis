@@ -1,6 +1,6 @@
 from src.my_models_._abstract_model_.AbstractPreprocessor import AbstractPreprocessor
 import pandas as pd
-import utils as u
+import src.utils as u
 
 class Preprocessor(AbstractPreprocessor):
     def __init__(self, dataframe: pd.DataFrame):

@@ -18,9 +18,7 @@ class AbstractGroupAggregation(ABC):
     def pivot_table(self, index, columns, values):
         pass
 
-    #### estos agrupamientos son comunes para ambos dataframes
-
-    
+    #### estos agrupamientos son comunes para ambos dataframes   
     
     def df_Escuela_ID_Alumno_ID_count(self):
         if all(col in self.dataframe.columns for col in ['Escuela_ID']):

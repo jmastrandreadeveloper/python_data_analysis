@@ -115,18 +115,18 @@ class Preprocessor(AbstractPreprocessor):
         """
         # filtrar el dataframe para su análisis
         # alumnos incluidos = Si
-        df_alumnos_incluidos_SI = self.get_alumnos_incluidos_SI(dataframe)
+        self._df_alumnos_incluidos_SI = self.get_alumnos_incluidos_SI(dataframe)
         # alumnos incluidos = No
-        df_alumnos_incluidos_NO = self.get_alumnos_incluidos_NO(dataframe)
+        self._df_alumnos_incluidos_NO = self.get_alumnos_incluidos_NO(dataframe)
         # alumnos con DESEMPEÑO
-        df_alumnos_con_DESEMPEÑO = self.get_alumnos_con_DESEMPEÑO(df_alumnos_incluidos_NO)
+        self._df_alumnos_con_DESEMPEÑO = self.get_alumnos_con_DESEMPEÑO(self._df_alumnos_incluidos_NO)
         # alumnos sin DESEMPEÑO
-        df_alumnos_sin_DESEMPEÑO = self.get_alumnos_sin_DESEMPEÑO(df_alumnos_incluidos_NO)
+        self._df_alumnos_sin_DESEMPEÑO = self.get_alumnos_sin_DESEMPEÑO(self._df_alumnos_incluidos_NO)
         # alumnos con < de 300 palabras leídas
-        df_alumnos_menor_a_300_palabras = self.get_alumnos_con_menos_de_300_palabras(df_alumnos_con_DESEMPEÑO)
+        self._df_alumnos_menor_a_300_palabras = self.get_alumnos_con_menos_de_300_palabras(self._df_alumnos_con_DESEMPEÑO)
         # alumnos con > de 300 palabras leídas
-        df_alumnos_mayor_a_300_palabras = self.get_alumnos_con_más_de_300_palabras(df_alumnos_con_DESEMPEÑO)
+        self._df_alumnos_mayor_a_300_palabras = self.get_alumnos_con_más_de_300_palabras(self._df_alumnos_con_DESEMPEÑO)
         # alumnos con mázxima cantidad de palabras leídas
-        df_alumnos_con_MÁXIMA_cant_palabras = self.get_mejor_medición_por_alumno(df_alumnos_menor_a_300_palabras)
+        self._df_alumnos_con_MÁXIMA_cant_palabras = self.get_mejor_medición_por_alumno(self._df_alumnos_menor_a_300_palabras)
 
-        return df_alumnos_incluidos_SI , df_alumnos_incluidos_NO , df_alumnos_con_DESEMPEÑO , df_alumnos_sin_DESEMPEÑO , df_alumnos_menor_a_300_palabras , df_alumnos_mayor_a_300_palabras , df_alumnos_con_MÁXIMA_cant_palabras
+        return

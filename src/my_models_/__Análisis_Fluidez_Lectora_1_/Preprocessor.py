@@ -84,35 +84,7 @@ class Preprocessor(AbstractPreprocessor):
 
         return df_mejores_mediciones
     
-    def filtrar_dataframe(self,dataframe):
-        """
-        df_fl_1_proceso_3 = procesarFL.proceso_3_alumnos_incluidos_SI(
-            df_fl_1_proceso_2,
-            PATH_BASES_DE_SALIDA,
-            NOMBRE_BASE_SALIDA_FL_1,)
-        
-        df_fl_1_proceso_4 = procesarFL.proceso_4_alumnos_incluidos_NO(
-            df_fl_1_proceso_2,
-            PATH_BASES_DE_SALIDA,
-            NOMBRE_BASE_SALIDA_FL_1,)
-
-        [df_fl_1_con_DESEMPEÑO , df_fl_1_sin_DESEMPEÑO] = procesarFL.proceso_5_alumnos_con_DESEMPEÑO_y_sin_DESEMPEÑO(
-            df_fl_1_proceso_4,
-            PATH_BASES_DE_SALIDA,
-            NOMBRE_BASE_SALIDA_FL_1,)
-        
-        [df_fl_1_menor_a_300 , df_fl_1_mayor_a_300] = procesarFL.proceso_6_extraer_filas_cant_palabras_menores_y_mayores_a_300(
-            df_fl_1_con_DESEMPEÑO,
-            PATH_BASES_DE_SALIDA,
-            NOMBRE_BASE_SALIDA_FL_1,)
-        
-        df_fl_1_proceso_7 = procesarFL.proceso_7_buscar_MAX_cantidad_de_palabras(
-            df_fl_1_menor_a_300,
-            PATH_BASES_DE_SALIDA,
-            NOMBRE_BASE_SALIDA_FL_1,)
-
-        return df_fl_1_proceso_2 , df_fl_1_proceso_3 , df_fl_1_proceso_4 , df_fl_1_sin_DESEMPEÑO , df_fl_1_mayor_a_300 ,  df_fl_1_proceso_7    
-        """
+    def filtrar_dataframe(self,dataframe):        
         # filtrar el dataframe para su análisis
         # alumnos incluidos = Si
         self._df_alumnos_incluidos_SI = self.get_alumnos_incluidos_SI(dataframe)

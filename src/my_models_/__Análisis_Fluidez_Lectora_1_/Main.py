@@ -46,6 +46,7 @@ class Main(AbstractMain):
         self.group_agg = GroupAggregation(self.preprocessor._df_alumnos_con_MÁXIMA_cant_palabras)
         # agrupar dataframe por criterios
         self.group_agg.groupby(self.preprocessor._df_alumnos_con_MÁXIMA_cant_palabras)        
+        
         # calcular el porcentaje de desempeño de acuerdo a diferentes criterios
         # creo un objeto para tal fin
         self.calculador = CalculadorDePorcentajes(self.group_agg)
@@ -62,5 +63,5 @@ class Main(AbstractMain):
         pass
 
     def reporte(self):
-       print('haciendo reporte de Fluiez')
-       self.reporteFluidez = Report('-')
+        print('haciendo reporte de Fluiez')
+        self.reporteFluidez = Report('-')

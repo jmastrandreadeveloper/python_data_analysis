@@ -5,7 +5,7 @@ from src.my_models_._abstract_model_.AbstractMain import AbstractMain
 from .GroupAggregation import GroupAggregation
 from .Preprocessor import Preprocessor
 from .Transform import Transform
-from .Report import Report
+#from .Report import Report
 from .CalculadorDePorcentajes import CalculadorDePorcentajes
 
 
@@ -28,9 +28,7 @@ class Main(AbstractMain):
             self.dataframe,
             [
                 'Alumno_ID','Operativo','CURSO_NORMALIZADO','Curso','División','Ausente','Cantidad_de_palabras','Prosodia','Incluido','Turno','Modalidad','Nivel','Nivel_Unificado','Gestión','Supervisión','Escuela_ID','Departamento','Localidad','zona','Regional','ciclo_lectivo','separador']
-        )
-        print(self.dataframe.columns)
-        
+        )        
         # calcular desempeño por alumno, crear columna DESEMPEÑO
         self.dataframe = self.transform.calcular_DESEMPEÑO_por_Alumno_ID()
         self.dataframe = self.preprocessor.reordenar_columnas(
@@ -58,10 +56,10 @@ class Main(AbstractMain):
         u.save_dataframe_to_csv(self.calculador._df_Desempeño_por_Supervisión_CURSO_NORMALIZADO,'data/processed/transformed/_df_Desempeño_por_Supervisión_CURSO_NORMALIZADO.csv') 
         u.save_dataframe_to_csv(self.calculador._df_Desempeño_por_Nivel_CURSO_NORMALIZADO,'data/processed/transformed/_df_Desempeño_por_Nivel_CURSO_NORMALIZADO.csv') 
 
-        self.reporte()
+        #self.reporte()
 
         pass
 
-    def reporte(self):
-        print('haciendo reporte de Fluiez')
-        self.reporteFluidez = Report('-')
+    # def reporte(self):
+    #     print('haciendo reporte de Fluiez')
+    #     self.reporteFluidez = Report('-')

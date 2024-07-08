@@ -45,7 +45,7 @@ def filtrar_por_escuela_curso_y_division(unaEscuela, dFrame, lista_de_cursos):
         dict_total_alumnos_por_tipo_de_desempeño_por_curso_división[CURSO_NORMALIZADO] = total_alumnos_por_tipo_de_desempeño_por_curso_división_df
     return dict_desempeño_por_curso_division , dict_total_alumnos_por_tipo_de_desempeño_por_curso_división
 
-def filtrar_matricula_por_escuela_curso_y_division(dFrame, Escuela_ID, lista_de_cursos):
+def filtrar_matricula_por_escuela_curso_y_division(Escuela_ID ,dFrame,  lista_de_cursos):
     dict_matricula_por_curso_division = {}
     
     # Aseguramos que 'Escuela_ID' sea accesible como columna, reseteando el índice si es necesario
@@ -63,6 +63,6 @@ def filtrar_matricula_por_escuela_curso_y_division(dFrame, Escuela_ID, lista_de_
         dFrame_filtrado = dFrame_filtrado.rename(columns={'Alumno_ID': 'Matrícula', 'CURSO_NORMALIZADO': 'Curso'})
         df_matricula_por_curso_division = dFrame_filtrado[['Curso', 'División', 'Matrícula']].reset_index(drop=True)
         df_matricula_por_curso_division.set_index('Curso', inplace=True)
-        dict_matricula_por_curso_division[CURSO_NORMALIZADO] = df_matricula_por_curso_division       
+        dict_matricula_por_curso_division[CURSO_NORMALIZADO] = df_matricula_por_curso_division
     
     return dict_matricula_por_curso_division

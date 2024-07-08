@@ -1,6 +1,6 @@
 from src.my_models_._abstract_model_.AbstractReport import AbstractReport
 import pandas as pd
-import src.my_models_.__Análisis_Fluidez_Lectora_1_.Filtros.filtro1 as f
+import src.my_models_.___Filtros.filtro1 as f
 
 class Report(AbstractReport):
     def __init__(self, output_path, *args):

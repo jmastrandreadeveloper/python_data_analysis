@@ -1,6 +1,6 @@
 import pandas as pd
 
-def filtrar_datos_institucionales_por_escuela(unaEscuela, dFrame):
+def filtrar_datos_institucionales_por_escuela( unaEscuela, dFrame , ):
     # Inicializa un diccionario vacío para los datos institucionales.
     diccionario_datos_institucionales = {}
 
@@ -29,7 +29,7 @@ def filtrar_datos_institucionales_por_escuela(unaEscuela, dFrame):
     return diccionario_datos_institucionales
 
 
-def filtrar_por_escuela(unaEscuela,dFrame):
+def filtrar_por_escuela(unaEscuela , dFrame):
     desempeño_por_escuela_df = pd.DataFrame()
     total_alumnos_por_escuela_df = pd.DataFrame()
     # Filtrado del DataFrame para obtener los datos correspondientes a la escuela dada.
@@ -46,14 +46,14 @@ def filtrar_por_escuela(unaEscuela,dFrame):
     # # Devolución de dos dataframe con el desempeño y el total de alumnos
     return desempeño_por_escuela_df , total_alumnos_por_escuela_df
 
-def filtrar_matricula_por_escuela(dFrame, Escuela_ID):
+def filtrar_matricula_por_escuela(Escuela_ID , dFrame, ):
     # Filtrar el DataFrame por Escuela_ID
     dFrame_filtrado = dFrame[dFrame['Escuela_ID'] == Escuela_ID]
     # Contar Alumno_ID para el DataFrame filtrado
     total_alumnos = dFrame_filtrado['Alumno_ID'].count()
     return total_alumnos
 
-def lista_de_cursos_escuela(dFrame , Escuela_ID):
+def lista_de_cursos_escuela( Escuela_ID , dFrame ,):
     # Reset index para poder filtrar por 'Escuela_ID'
     agrupado_reset = dFrame.reset_index()
     # Filtramos por una 'Escuela_ID' específica

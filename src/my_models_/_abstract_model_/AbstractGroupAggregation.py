@@ -25,7 +25,7 @@ class AbstractGroupAggregation(ABC):
         missing_columns = [col for col in required_columns if col not in self.dataframe.columns]
         if not missing_columns:
             result = self.dataframe.groupby(['Escuela_ID']).agg({'Alumno_ID': 'count'})
-            return result
+            return result.reset_index()
         else:
             raise ValueError(f'Las columnas especificadas no existen en el dataframe. Columnas faltantes: {missing_columns}')
 
@@ -34,7 +34,7 @@ class AbstractGroupAggregation(ABC):
         missing_columns = [col for col in required_columns if col not in self.dataframe.columns]
         if not missing_columns:
             result = self.dataframe.groupby(['Escuela_ID', 'CURSO_NORMALIZADO']).agg({'Alumno_ID': 'count'})
-            return result
+            return result.reset_index()
         else:
             raise ValueError(f'Las columnas especificadas no existen en el dataframe. Columnas faltantes: {missing_columns}')
 
@@ -43,7 +43,7 @@ class AbstractGroupAggregation(ABC):
         missing_columns = [col for col in required_columns if col not in self.dataframe.columns]
         if not missing_columns:
             result = self.dataframe.groupby(['Escuela_ID', 'CURSO_NORMALIZADO', 'División']).agg({'Alumno_ID': 'count'})
-            return result
+            return result.reset_index()
         else:
             raise ValueError(f'Las columnas especificadas no existen en el dataframe. Columnas faltantes: {missing_columns}')
 
@@ -52,7 +52,7 @@ class AbstractGroupAggregation(ABC):
         missing_columns = [col for col in required_columns if col not in self.dataframe.columns]
         if not missing_columns:
             result = self.dataframe.groupby(['Nivel_Unificado', 'CURSO_NORMALIZADO']).agg({'Alumno_ID': 'count'})
-            return result
+            return result.reset_index()
         else:
             raise ValueError(f'Las columnas especificadas no existen en el dataframe. Columnas faltantes: {missing_columns}')
 
@@ -61,6 +61,6 @@ class AbstractGroupAggregation(ABC):
         missing_columns = [col for col in required_columns if col not in self.dataframe.columns]
         if not missing_columns:
             result = self.dataframe.groupby(['Supervisión', 'CURSO_NORMALIZADO']).agg({'Alumno_ID': 'count'})
-            return result
+            return result.reset_index()
         else:
             raise ValueError(f'Las columnas especificadas no existen en el dataframe. Columnas faltantes: {missing_columns}')

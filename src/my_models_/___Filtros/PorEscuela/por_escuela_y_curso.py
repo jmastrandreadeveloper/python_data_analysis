@@ -31,7 +31,7 @@ def filtrar_por_escuela_y_curso(unaEscuela, dFrame, lista_de_cursos):
     total_alumnos_por_tipo_de_desempeño_por_curso_df = total_alumnos_por_tipo_de_desempeño_por_curso_df.reindex(['Crítico', 'Básico', 'Medio', 'Avanzado'])    
     return desempeño_por_curso_df , total_alumnos_por_tipo_de_desempeño_por_curso_df
 
-def filtrar_matricula_por_escuela_y_curso(dFrame , Escuela_ID):
+def filtrar_matricula_por_escuela_y_curso(Escuela_ID , dFrame , ):
     """
     la diferencia con el metodo de arriba es que el agrupado se hace una sola vez
     y luego se hace el filtrado

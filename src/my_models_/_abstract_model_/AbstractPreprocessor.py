@@ -86,6 +86,7 @@ class AbstractPreprocessor(ABC):
         - list: Una lista con los datos de la columna especificada, ordenados. Si
         unicos es True, los datos también serán únicos.
         """
+        
         if nombre_columna in self.dataframe.columns:
             if unicos:
                 # Elimina duplicados convirtiendo a set y luego a lista para ordenar

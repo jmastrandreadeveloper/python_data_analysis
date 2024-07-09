@@ -1,8 +1,8 @@
 import os
 import sys
-from src.data_loading import DataLoader
+from src.tools.data_loading import DataLoader
 
-import src.utils as u
+import src.tools.utils as u
 from src.my_models_.__Reporte_Por_Escuela_Análisis_Fluidez_Lectora.ReporteEscuela import ReporteEscuela
 
 # obligatorio para poder acceder a todas las funcionalidades de las librerias para el proyecto y todo lo demas

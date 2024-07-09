@@ -1,5 +1,5 @@
 import pandas as pd
-import src.utils as u
+import src.tools.utils as u
 from src.my_models_.__Análisis_Fluidez_Lectora_1_.GroupAggregation import GroupAggregation
 from src.my_models_.__Análisis_Fluidez_Lectora_1_.Preprocessor import Preprocessor
 """
@@ -17,7 +17,7 @@ class CalculadorDePorcentajes:
         # porcentaje de desempeño por escuela
         self._df_Desempeño_por_Escuela = self.porcentajes_desempeño(
             ['Escuela_ID'],
-            self.group_agg._df_Escuela_ID_Alumno_ID_count,
+            self.group_agg._df_FL_Escuela_ID_Alumno_ID_count,
             self.group_agg._df_Escuela_ID_DESEMPEÑO_Alumno_ID_count,
             'Total_Alumnos_por_Tipo_de_Desempeño',
             'Total_Alumnos_por_Escuela_ID',
@@ -33,7 +33,7 @@ class CalculadorDePorcentajes:
         # porcentaje de desempeño por escuela y curso normalizado 
         self._df_Desempeño_por_Escuela_CURSO_NORMALIZADO = self.porcentajes_desempeño(
             ['Escuela_ID','CURSO_NORMALIZADO'],
-            self.group_agg._df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count,
+            self.group_agg._df_FL_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count,
             self.group_agg._df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,
             'Total_Alumnos_por_Tipo_de_Desempeño',
             'Total_Alumnos_por_Escuela_ID_y_CURSO_NORMALIZADO',
@@ -48,7 +48,7 @@ class CalculadorDePorcentajes:
         # porcentaje de desempeño por escuela curso y división
         self._df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division = self.porcentajes_desempeño(
             ['Escuela_ID','CURSO_NORMALIZADO','División'],
-            self.group_agg._df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count,
+            self.group_agg._df_FL_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count,
             self.group_agg._df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count,
             'Total_Alumnos_por_Tipo_de_Desempeño',
             'Total_Alumnos_por_Escuela_ID_CURSO_NORMALIZADO_y_División',
@@ -76,7 +76,7 @@ class CalculadorDePorcentajes:
         # porcentaje de desempeño por nivel y curso
         self._df_Desempeño_por_Nivel_CURSO_NORMALIZADO = self._df_Desempeño_por_Nivel_CURSO_NORMALIZADO = self.porcentajes_desempeño(
             ['Nivel_Unificado','CURSO_NORMALIZADO'],
-            self.group_agg._df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count,
+            self.group_agg._df_FL_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count,
             self.group_agg._df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,
             'Total_Alumnos_por_Tipo_de_Desempeño',
             'Total_Alumnos_por_Nivel_CURSO_NORMALIZADO',

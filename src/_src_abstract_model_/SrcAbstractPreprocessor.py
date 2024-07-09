@@ -84,8 +84,8 @@ class AbstractPreprocessor(ABC):
         
         Retorna:
         - list: Una lista con los datos de la columna especificada, ordenados. Si
-        unicos es True, los datos también serán únicos.
-        """
+        unicos es True, los datos también serán únicos.        """
+        
         if nombre_columna in self.dataframe.columns:
             if unicos:
                 # Elimina duplicados convirtiendo a set y luego a lista para ordenar
@@ -97,15 +97,6 @@ class AbstractPreprocessor(ABC):
             # Maneja el caso en que la columna no exista en el DataFrame
             print(f"La columna '{nombre_columna}' no existe en el DataFrame.")
             return []
-        
-    # este método es común para los dataframes nominales y de fluidez lectora
-    def agregar_columna_Nivel_Unificado(self):
-        # Crear la columna 'Nivel_Unificado' directamente sin usar .insert(), por simplicidad y claridad.        
-        self.dataframe.loc[:, 'Nivel_Unificado'] = self.dataframe['Nivel'].replace({
-            'Secundario Orientado': 'Secundario', 
-            'Secundario Técnico': 'Secundario'
-        })
-        return self.dataframe
     
     def reordenar_columnas(self , dataframe , listaDeColumnas):
         # reordenar las columnas

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 import pandas as pd
 import json
-import src.utils as u
+import src.tools.utils as u
 
 """
 Esta clase va a dirigir el reporte.

@@ -1,6 +1,7 @@
 from src.my_models_._abstract_model_.AbstractPreprocessor import AbstractPreprocessor
 import pandas as pd
-import src.utils as u
+import src.tools.utils as u
+import numpy as np
 
 class Preprocessor(AbstractPreprocessor):
     def __init__(self, dataframe: pd.DataFrame):
@@ -31,6 +32,25 @@ class Preprocessor(AbstractPreprocessor):
         pass
 
     ######################################### acá comienzo con mi código #################################
+    def do_preprocessor(self):
+        # dejar solamente las filas que necesitamos, estas son todas aquellas que sea CURSO_NORMALIZADO = 1°, 2°, 3°, 4°, 5°, 6°, 7°, 
+        # dejar :  1°  2°  3°  4°  5°  6°  7°
+        # eliminar : Múltiple Domiciliario -  Nivel I
+        # dejar las columnas que hacen falta        
+        self.dataframe = self.conservar_filas('CURSO_NORMALIZADO',['1°' , '2°' , '3°' , '4°' , '5°' , '6°' , '7°'])        
+        # arreglar la columna edad para que queden todos en formato numérico
+        self.dataframe = self.fix_columna_edad()                
+        # agregar columna Nivel_Unificado    
+        self.dataframe = self.agregar_columna_Nivel_Unificado()        
+        # reordenar columnas
+        self.dataframe = self.reordenar_columnas(
+            self.dataframe,
+            [
+                'ciclo_lectivo','Alumno_ID','Sexo','Edad','Edad_Correcta','CURSO_NORMALIZADO','Curso','División','Turno','Modalidad','Nivel','Nivel_Unificado','Gestión','Supervisión','Escuela_ID','Departamento','Localidad','zona','AMBITO','Regional']
+        )
+                
+        return self.dataframe    
+    
     def fix_columna_edad(self):
         print('...arreglando datos de la columna edad...')
         def create_age_reference() -> dict:
@@ -124,6 +144,5 @@ class Preprocessor(AbstractPreprocessor):
             return self.dataframe
         
         validate_data()
-        u.save_dataframe_to_csv(self.dataframe,'data/processed/transformed/df_nominal_con_edades_válidas.csv')
         return self.dataframe
 

@@ -48,4 +48,3 @@ class GroupAggregationFLectora1:
             return result.reset_index()
         else:
             raise ValueError(f'Las columnas especificadas no existen en el dataframe. Columnas faltantes: {missing_columns}')
-

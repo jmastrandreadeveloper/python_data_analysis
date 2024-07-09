@@ -1,10 +1,10 @@
 #from src.my_models_._abstract_model_.AbstractReport import AbstractReport
-import src.utils as u
-import src.DataFrameToCharJS as DataFrameToCharJS
-import src.DataFrameToDict as DataFrameToDict
-import src.DataFrameToDict as DataFrameToDict
-import src.DataFrameToTabla as DataFrameToTabla
-import src.DictToDataFrame as DictToDataFrame
+import src.tools.utils as u
+import src.tools.DataFrameToCharJS as DataFrameToCharJS
+import src.tools.DataFrameToDict as DataFrameToDict
+import src.tools.DataFrameToDict as DataFrameToDict
+import src.tools.DataFrameToTabla as DataFrameToTabla
+import src.tools.DictToDataFrame as DictToDataFrame
 from src.my_models_.__Nominal_para_fluidez_Lectora_1_.Main import Main as mainNominal
 from src.my_models_.__Análisis_Fluidez_Lectora_1_.Main import Main as mainFluidezLectora
 # from src.my_models_.__Nominal_para_fluidez_Lectora_1_.Report import Report as rNom
@@ -20,7 +20,7 @@ from src.my_models_.___Filtros.PorSupervisión.por_supervisión_y_curso import f
 
 class ReporteEscuela : #(AbstractReport):
     def __init__(self, nominal : mainNominal , fluidez : mainFluidezLectora):
-        self.Nominal = nominal
+        self.nominal = nominal
         self.Fl = fluidez
 
     def do_report(self):
@@ -42,18 +42,18 @@ class ReporteEscuela : #(AbstractReport):
             'datos institucionales' : None
         }
         # iterar sobre los elementos de la lista de escuelas generadas en el Main del Nominal
-        for Escuela_ID in self.Nominal.listaEscuelas_IDs:
+        for Escuela_ID in self.nominal.listaEscuelas_IDs:
             dictDatos = {
                 'Escuela_ID' : Escuela_ID,
                 'data' : {
-                    'datos_institucionales' : self.datos_institucionales(Escuela_ID , self.Nominal.Nominal , ),
-                    'lista_de_cursos_escuela' : self.lista_de_cursos_escuela( Escuela_ID , self.Nominal.Nominal ,),
-                    'matricula_por_escuela' : self.filtrar_matricula_por_escuela(Escuela_ID , self.Nominal.Nominal , ),
-                    'matricula_por_curso' : self.matricula_por_curso(Escuela_ID , self.Nominal.group_agg._df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count),
-                    #'matricula_por_curso_división' : filtrar_matricula_por_escuela_curso_y_division(Escuela_ID ,  self.Nominal.group_agg._df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count , lista_de_cursos_escuela( Escuela_ID , self.Nominal.Nominal ,)),
-                    # 'fluidez lectora 1' : {
-                    #     'matricula_por_escuela_fluidez_lectora_1' : ayuda.Helper.matricula_por_escuela_fluidez_lectora_1(Escuela_ID)
-                    # }
+                    'datos_institucionales' : self.nominal.group_agg.datos_institucionales(Escuela_ID),
+                    'lista_de_cursos_escuela' : self.nominal.group_agg.lista_de_cursos_escuela( Escuela_ID),
+                    'matricula_por_escuela' : self.nominal.group_agg.matricula_por_escuela(Escuela_ID),
+                    'matricula_por_curso' : self.nominal.group_agg.matricula_por_curso(Escuela_ID),
+                    'matricula_por_curso_división' : self.nominal.group_agg.matricula_por_curso_división(Escuela_ID),
+                    'fluidez lectora 1' : {
+                        'matricula_por_escuela_fluidez_lectora_1' : self.Fl.group_agg.matricula_por_escuela_fluidez_lectora_1(Escuela_ID)
+                    }
                 }
             }
             self.listDictFinal.append(dictDatos)
@@ -99,7 +99,7 @@ class ReporteEscuela : #(AbstractReport):
             matricula_por_curso_df
         )
     
-    """
+    
     def matricula_por_curso_división(Escuela_ID):
         Helper.matricula_por_curso_división_tabla = {}
         Helper.dict_matricula_por_curso_division = Módulos.GruposYFiltros.PorEscuela.por_escuela_curso_y_división.filtrar_matricula_por_escuela_curso_y_division(
@@ -114,6 +114,7 @@ class ReporteEscuela : #(AbstractReport):
             
         return Helper.matricula_por_curso_división_tabla
     
+    """
     @staticmethod
     def matricula_por_escuela_fluidez_lectora_1(Escuela_ID):
         Helper.matriculaPorEscuela_FluidezLectora_1 = Módulos.GruposYFiltros.PorEscuela.por_escuela.filtrar_matricula_por_escuela(

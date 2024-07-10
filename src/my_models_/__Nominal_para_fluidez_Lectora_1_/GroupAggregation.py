@@ -1,5 +1,6 @@
 from src.my_models_._abstract_model_.AbstractGroupAggregation import AbstractGroupAggregation
 import pandas as pd
+import src.tools.utils as u
 import os
 import src.tools.DataFrameToTabla as dfToTable
 
@@ -38,7 +39,16 @@ class GroupAggregation(AbstractGroupAggregation):
         self._df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count()
         self._df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count = self.df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count()
         self._df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count = self.df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count()
+        # guardar los data frames
+        self.salvar_df() 
         pass
+
+    def salvar_df(self):
+        u.save_dataframe_to_csv(self._df_Escuela_ID_Alumno_ID_count,'data/processed/transformed/Nominal/_df_FL_Escuela_ID_Alumno_ID_count.csv')
+        u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/Nominal/_df_FL_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count,'data/processed/transformed/Nominal/_df_FL_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/Nominal/_df_FL_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/Nominal/_df_FL_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
 
     def datos_institucionales(self,Escuela_ID):
         datosInstitucionales_dict = filtrar_datos_institucionales_por_escuela(

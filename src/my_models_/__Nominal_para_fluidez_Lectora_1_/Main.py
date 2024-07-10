@@ -22,5 +22,5 @@ class Main(AbstractMain):
         self.group_agg = GroupAggregation(self.df_nominal_processed)
         # para que finalmente sea accedido desde otra parte, desde el reporte
         # porque de este dataframe saldrán los datos institucionales        
-        u.save_dataframe_to_csv(self.df_nominal_processed,'data/processed/transformed/Nominal_final_procesado.csv')        
+        u.save_dataframe_to_csv(self.df_nominal_processed,'data/processed/transformed/Nominal/Nominal_final_procesado.csv')        
         pass

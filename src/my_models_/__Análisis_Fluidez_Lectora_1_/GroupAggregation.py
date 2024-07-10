@@ -30,10 +30,10 @@ class GroupAggregation(AbstractGroupAggregation):
         # llamo desde acá al agrupamiento que quiero..
         self.df_alumnos_con_MÁXIMA_cant_palabras = dataframe
         # agrupamientos que salen de la clase abstracta dado que son comunes para los dos dataframes
-        self._df_FL_Escuela_ID_Alumno_ID_count = self.df_Escuela_ID_Alumno_ID_count()
-        self._df_FL_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count()
-        self._df_FL_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count()
-        self._df_FL_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count = self.df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count()
+        self._df_Escuela_ID_Alumno_ID_count = self.df_Escuela_ID_Alumno_ID_count()
+        self._df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count()
+        self._df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count()
+        self._df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count = self.df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count()
         self._df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count = self.df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count()        
         # agrupamiento que son propios de este dataframe de fluidez lectora, estos agruipamientos están
         # en esta función., más abajo , son los que agrupan el desempeño y nos va a servir para poder
@@ -57,18 +57,18 @@ class GroupAggregation(AbstractGroupAggregation):
     def matricula_por_escuela_fluidez_lectora_1(self,Escuela_ID):
         return filtrar_matricula_por_escuela(
             Escuela_ID,
-            self._df_FL_Escuela_ID_Alumno_ID_count,
+            self._df_Escuela_ID_Alumno_ID_count,
         )    
         
     def salvar_df(self):
-        u.save_dataframe_to_csv(self._df_FL_Escuela_ID_Alumno_ID_count,'data/processed/transformed/_df_FL_Escuela_ID_Alumno_ID_count.csv')
-        u.save_dataframe_to_csv(self._df_FL_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/_df_FL_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
-        u.save_dataframe_to_csv(self._df_FL_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count,'data/processed/transformed/_df_FL_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count.csv') 
-        u.save_dataframe_to_csv(self._df_FL_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/_df_FL_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
-        u.save_dataframe_to_csv(self._df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/_df_FL_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Escuela_ID_Alumno_ID_count,'data/processed/transformed/Fluidez_1/_df_Escuela_ID_Alumno_ID_count.csv')
+        u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/Fluidez_1/_df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count,'data/processed/transformed/Fluidez_1/_df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/Fluidez_1/_df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/Fluidez_1/_df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
 
-        u.save_dataframe_to_csv(self._df_Escuela_ID_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/_df_Escuela_ID_DESEMPEÑO_Alumno_ID_count.csv') 
-        u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/_df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count.csv') 
-        u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/_df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count.csv') 
-        u.save_dataframe_to_csv(self._df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/_df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count.csv') 
-        u.save_dataframe_to_csv(self._df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/_df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Escuela_ID_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/Fluidez_1/_df_Escuela_ID_DESEMPEÑO_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/Fluidez_1/_df_Escuela_ID_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/Fluidez_1/_df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/Fluidez_1/_df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/Fluidez_1/_df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count.csv') 

@@ -43,20 +43,11 @@ class Main(AbstractMain):
         # crear el objeto para agrupar el df de fluidez
         self.group_agg = GroupAggregation(self.preprocessor._df_alumnos_con_MÁXIMA_cant_palabras)
         # agrupar dataframe por criterios
-        self.group_agg.groupby(self.preprocessor._df_alumnos_con_MÁXIMA_cant_palabras)        
-        
+        self.group_agg.groupby(self.preprocessor._df_alumnos_con_MÁXIMA_cant_palabras)
         # calcular el porcentaje de desempeño de acuerdo a diferentes criterios
         # creo un objeto para tal fin
         self.calculador = CalculadorDePorcentajes(self.group_agg)
         self.calculador.calcular_porcentajes_desempeño()
-
-        u.save_dataframe_to_csv(self.calculador._df_Desempeño_por_Escuela,'data/processed/transformed/_df_Desempeño_por_Escuela.csv') 
-        u.save_dataframe_to_csv(self.calculador._df_Desempeño_por_Escuela_CURSO_NORMALIZADO,'data/processed/transformed/_df_Desempeño_por_Escuela_CURSO_NORMALIZADO.csv') 
-        u.save_dataframe_to_csv(self.calculador._df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division,'data/processed/transformed/_df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division.csv') 
-        u.save_dataframe_to_csv(self.calculador._df_Desempeño_por_Supervisión_CURSO_NORMALIZADO,'data/processed/transformed/_df_Desempeño_por_Supervisión_CURSO_NORMALIZADO.csv') 
-        u.save_dataframe_to_csv(self.calculador._df_Desempeño_por_Nivel_CURSO_NORMALIZADO,'data/processed/transformed/_df_Desempeño_por_Nivel_CURSO_NORMALIZADO.csv') 
-
-        #self.reporte()
 
         pass
 

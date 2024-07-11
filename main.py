@@ -26,7 +26,7 @@ def main():
     fl1 = mFL1(df_FluidezLectora_1)
 
     #ReporteEscuela(nom.reporteNominal,fl1.reporteFluidez).do_report()
-    ReporteEscuela(nom,fl1).do_report()
+    ReporteEscuela(nom , fl1).do_report()
 
     return
 

@@ -49,47 +49,4 @@ class GroupAggregation(AbstractGroupAggregation):
         u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/Nominal/_df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
         u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count,'data/processed/transformed/Nominal/_df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count.csv') 
         u.save_dataframe_to_csv(self._df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/Nominal/_df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
-        u.save_dataframe_to_csv(self._df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/Nominal/_df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
-
-    def datos_institucionales(self,Escuela_ID):
-        datosInstitucionales_dict = filtrar_datos_institucionales_por_escuela(
-            Escuela_ID,
-            self.processed_dataframe            
-        )
-        return datosInstitucionales_dict
-    
-    def lista_de_cursos_escuela(self,Escuela_ID):
-        lista_de_cursos = lista_de_cursos_escuela(
-            Escuela_ID,
-            self.processed_dataframe                        
-        )        
-        return lista_de_cursos
-        
-    def matricula_por_escuela(self,Escuela_ID):
-        return filtrar_matricula_por_escuela(
-            Escuela_ID,
-            self._df_Escuela_ID_Alumno_ID_count, # está contando los alumnos que están en el dataframe en vez de traer el valor ya calculado
-        )
-    
-    def matricula_por_curso(self,Escuela_ID):
-        matricula_por_curso_df = filtrar_matricula_por_escuela_y_curso(            
-            Escuela_ID,
-            self._df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count
-        )
-        return dfToTable.convertir_dataFrame_a_Tabla_De_Datos(
-            matricula_por_curso_df
-        )
-    
-    def matricula_por_curso_división(self,Escuela_ID):
-        matricula_por_curso_división_tabla = {}
-        dict_matricula_por_curso_division = filtrar_matricula_por_escuela_curso_y_division(
-            Escuela_ID,
-            self._df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count,            
-            self.lista_de_cursos_escuela(Escuela_ID)
-        )
-        for Curso in self.lista_de_cursos_escuela(Escuela_ID):
-            # saco el dataframe qu está dentro del diccionario
-            matricula_por_curso_división_tabla[Curso] = dfToTable.convertir_dataFrame_a_Tabla_De_Datos(
-                dict_matricula_por_curso_division.get(Curso))
-            
-        return matricula_por_curso_división_tabla
+        u.save_dataframe_to_csv(self._df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/Nominal/_df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count.csv')

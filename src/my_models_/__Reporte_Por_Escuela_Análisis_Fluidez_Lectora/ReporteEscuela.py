@@ -10,13 +10,13 @@ from src.my_models_.__Análisis_Fluidez_Lectora_1_.Main import Main as mainFluid
 # from src.my_models_.__Nominal_para_fluidez_Lectora_1_.Report import Report as rNom
 # from src.my_models_.__Análisis_Fluidez_Lectora_1_.Report import Report as rAFL
 import pandas as pd
-import src.my_models_.___Filtros.filtro1 as f
-from src.my_models_.___Filtros.PorEscuela.por_escuela import filtrar_por_escuela,filtrar_datos_institucionales_por_escuela,filtrar_matricula_por_escuela,lista_de_cursos_escuela
-from src.my_models_.___Filtros.PorEscuela.por_escuela_y_curso import filtrar_por_escuela_y_curso
-from src.my_models_.___Filtros.PorEscuela.por_escuela_y_curso import filtrar_matricula_por_escuela_y_curso
-from src.my_models_.___Filtros.PorEscuela.por_escuela_curso_y_división import filtrar_por_escuela_curso_y_division , filtrar_matricula_por_escuela_curso_y_division
-from src.my_models_.___Filtros.PorNivel.por_nivel_y_curso import filtrar_por_nivel_y_curso
-from src.my_models_.___Filtros.PorSupervisión.por_supervisión_y_curso import filtrar_por_supervisión_y_curso
+from src.my_models_.____Filtros.datos_institucionales import datos_institucionales
+from src.my_models_.____Filtros.matricula_por_escuela import matricula_por_escuela
+from src.my_models_.____Filtros.desempeño_por_escuela import desempeño_por_escuela
+from src.my_models_.____Filtros.lista_de_cursos_escuela import lista_de_cursos_escuela
+from src.my_models_.____Filtros.listado_de_alumnos import listado_de_alumnos
+from src.my_models_.____Filtros.matricula_por_escuela_y_curso import matricula_por_escuela_y_curso
+from src.my_models_.____Filtros.matricula_por_escuela_curso_y_division import matricula_por_escuela_curso_y_division
 
 class ReporteEscuela : #(AbstractReport):
     def __init__(self, nominal : mainNominal , fluidez : mainFluidezLectora):
@@ -42,18 +42,33 @@ class ReporteEscuela : #(AbstractReport):
             'datos institucionales' : None
         }
         # iterar sobre los elementos de la lista de escuelas generadas en el Main del Nominal
+        #####################################################################################################
+        #####################################################################################################
+        #####################################################################################################
+        #####################################################################################################
+        ############### TENGO QUE USAR UN HELPER PARA PODER HACERLO DE OTRA FORMA ###########################
+        ############### TENGO QUE USAR UN HELPER PARA PODER HACERLO DE OTRA FORMA ###########################
+        ############### TENGO QUE USAR UN HELPER PARA PODER HACERLO DE OTRA FORMA ###########################
+        ############### TENGO QUE USAR UN HELPER PARA PODER HACERLO DE OTRA FORMA ###########################
+        ############### TENGO QUE USAR UN HELPER PARA PODER HACERLO DE OTRA FORMA ###########################
+        #####################################################################################################
+        #####################################################################################################
+        #####################################################################################################
+        #####################################################################################################
+        
+
         for Escuela_ID in self.nominal.listaEscuelas_IDs:
             dictDatos = {
                 'Escuela_ID' : Escuela_ID,
                 'data' : {
-                    'datos_institucionales' : self.nominal.group_agg.datos_institucionales(Escuela_ID),
-                    'lista_de_cursos_escuela' : self.nominal.group_agg.lista_de_cursos_escuela( Escuela_ID),
-                    'matricula_por_escuela' : self.nominal.group_agg.matricula_por_escuela(Escuela_ID),
-                    'matricula_por_curso' : self.nominal.group_agg.matricula_por_curso(Escuela_ID),
-                    'matricula_por_curso_división' : self.nominal.group_agg.matricula_por_curso_división(Escuela_ID),
-                    'fluidez lectora 1' : {
-                        'matricula_por_escuela_fluidez_lectora_1' : self.Fl.group_agg.matricula_por_escuela_fluidez_lectora_1(Escuela_ID)
-                    }
+                    'datos_institucionales' : self.datos_institucionales(Escuela_ID , self.nominal.df_nominal_datos_institucionales),
+                    'lista_de_cursos_escuela' : self.lista_de_cursos_escuela(Escuela_ID , self.nominal.df_nominal_processed),
+                    'matricula_por_escuela' : self.matricula_por_escuela(Escuela_ID , self.nominal.group_agg._df_Escuela_ID_Alumno_ID_count),
+                    'matricula_por_escuela_curso' : self.matricula_por_escuela_y_curso(Escuela_ID , self.nominal.group_agg._df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count),
+                    'matricula_por_escuela_curso_división' : self.matricula_por_escuela_curso_división(Escuela_ID , self.nominal.group_agg._df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count , self.lista_de_cursos_escuela(Escuela_ID , self.nominal.df_nominal_processed) ),
+                    #'fluidez lectora 1' : {
+                    #    'matricula_por_escuela_fluidez_lectora_1' : self.Fl.group_agg.matricula_por_escuela_fluidez_lectora_1(Escuela_ID)
+                    #}
                 }
             }
             self.listDictFinal.append(dictDatos)
@@ -71,7 +86,7 @@ class ReporteEscuela : #(AbstractReport):
         pass
     
     def datos_institucionales(self,Escuela_ID , dfnom ):
-        datosInstitucionales_dict = filtrar_datos_institucionales_por_escuela(
+        datosInstitucionales_dict = datos_institucionales(
             Escuela_ID,
             dfnom            
         )
@@ -84,14 +99,14 @@ class ReporteEscuela : #(AbstractReport):
         )        
         return lista_de_cursos
         
-    def matricula_por_escuela(Escuela_ID,dfnom):        
-        return filtrar_matricula_por_escuela(
+    def matricula_por_escuela(self,Escuela_ID,dfnom):        
+        return matricula_por_escuela(
             Escuela_ID,
             dfnom,            
         )    
     
-    def matricula_por_curso(Escuela_ID,_df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count):
-        matricula_por_curso_df = filtrar_matricula_por_escuela_y_curso(            
+    def matricula_por_escuela_y_curso(self,Escuela_ID,_df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count):
+        matricula_por_curso_df = matricula_por_escuela_y_curso(            
             Escuela_ID,
             _df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count
         )
@@ -100,19 +115,19 @@ class ReporteEscuela : #(AbstractReport):
         )
     
     
-    def matricula_por_curso_división(Escuela_ID):
-        Helper.matricula_por_curso_división_tabla = {}
-        Helper.dict_matricula_por_curso_division = Módulos.GruposYFiltros.PorEscuela.por_escuela_curso_y_división.filtrar_matricula_por_escuela_curso_y_division(
-            Helper.mat_Escuela_ID_Curso_División,
+    def matricula_por_escuela_curso_división(self,Escuela_ID , _df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count , lista_de_cursos) :
+        matricula_por_curso_división_tabla = {}
+        dict_matricula_por_curso_division = matricula_por_escuela_curso_y_division(
             Escuela_ID,
-            Helper.lista_de_cursos
+            _df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count,
+            lista_de_cursos
         )
-        for Curso in Helper.lista_de_cursos:
+        for Curso in lista_de_cursos:
             # saco el dataframe qu está dentro del diccionario
-            Helper.matricula_por_curso_división_tabla[Curso] = lib.UTILS.DataFrameToTabla.convertir_dataFrame_a_Tabla_De_Datos(
-                Helper.dict_matricula_por_curso_division.get(Curso))
+            matricula_por_curso_división_tabla[Curso] = DataFrameToTabla.convertir_dataFrame_a_Tabla_De_Datos(
+                dict_matricula_por_curso_division.get(Curso))
             
-        return Helper.matricula_por_curso_división_tabla
+        return matricula_por_curso_división_tabla
     
     """
     @staticmethod

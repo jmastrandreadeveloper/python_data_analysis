@@ -66,9 +66,3 @@ class GroupAggregation(AbstractGroupAggregation):
         u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/Fluidez_1/_df_Escuela_ID_CURSO_NORMALIZADO_División_DESEMPEÑO_Alumno_ID_count.csv') 
         u.save_dataframe_to_csv(self._df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/Fluidez_1/_df_Nivel_Unificado_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count.csv') 
         u.save_dataframe_to_csv(self._df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count,'data/processed/transformed/Fluidez_1/_df_Supervisión_CURSO_NORMALIZADO_DESEMPEÑO_Alumno_ID_count.csv') 
-
-    def matricula_por_escuela_fluidez_lectora_1(self,Escuela_ID):
-        return filtrar_matricula_por_escuela(
-            Escuela_ID,
-            self._df_Escuela_ID_Alumno_ID_count,
-        ) 

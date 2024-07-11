@@ -46,12 +46,16 @@ def filtrar_por_escuela(unaEscuela , dFrame):
     # # Devolución de dos dataframe con el desempeño y el total de alumnos
     return desempeño_por_escuela_df , total_alumnos_por_escuela_df
 
-def filtrar_matricula_por_escuela(Escuela_ID , dFrame, ):
+def filtrar_matricula_por_escuela(Escuela_ID, dFrame):
     # Filtrar el DataFrame por Escuela_ID
     dFrame_filtrado = dFrame[dFrame['Escuela_ID'] == Escuela_ID]
-    # Contar Alumno_ID para el DataFrame filtrado
-    total_alumnos = dFrame_filtrado['Alumno_ID'].count()
-    return total_alumnos
+    
+    # Devolver el primer valor de Alumno_ID como entero
+    if not dFrame_filtrado.empty:
+        return int(dFrame_filtrado['Alumno_ID'].values[0])
+    else:
+        return None  # o algún valor por defecto que prefieras, si no hay coincidencias
+
 
 def lista_de_cursos_escuela( Escuela_ID , dFrame ,):
     # Reset index para poder filtrar por 'Escuela_ID'

@@ -16,7 +16,7 @@ class Main(AbstractMain):
     def run_all(self):
         # Implementar una secuencia de operaciones que utilicen los métodos de las instancias        
         self.preprocessor = Preprocessor(self.dataframe)
-        self.df_nominal_processed = self.preprocessor.do_preprocessor()        
+        self.df_nominal_processed = self.preprocessor.do_preprocessor()
         # obtener la lista de las escuelas a analizar buscando en la columna Escuela_ID y devolviendo una lista de ellas
         self.listaEscuelas_IDs = self.preprocessor.obtener_datos_de_columna('Escuela_ID' , True)
         self.group_agg = GroupAggregation(self.df_nominal_processed)

@@ -112,4 +112,12 @@ class AbstractPreprocessor(ABC):
         return dataframe[listaDeColumnas]
     
     def filtrar_por_columna(self,columna,condición):
-        return self.dataframe[self.dataframe[columna] == condición] 
+        return self.dataframe[self.dataframe[columna] == condición]
+    
+    def quitar_columnas(self, dataframe , listaDeColumnasAQuitar, dejarFilasUnicas):
+        # Quitar las columnas especificadas
+        dataframe = dataframe.drop(columns=listaDeColumnasAQuitar)        
+        # Dejar filas únicas si se especifica
+        if dejarFilasUnicas:
+            dataframe = dataframe.drop_duplicates()        
+        return dataframe

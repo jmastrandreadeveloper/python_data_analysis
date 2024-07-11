@@ -109,8 +109,8 @@ def filtrar_matricula_por_escuela(dFrame, Escuela_ID):
     # Filtrar el DataFrame por Escuela_ID
     dFrame_filtrado = dFrame[dFrame['Escuela_ID'] == Escuela_ID]
     # Contar Alumno_ID para el DataFrame filtrado
-    total_alumnos = dFrame_filtrado['Alumno_ID'].count()
-    return total_alumnos
+    #total_alumnos = dFrame_filtrado['Alumno_ID'].count()
+    return dFrame_filtrado['Alumno_ID'].values
 
 def lista_de_cursos_escuela(dFrame , Escuela_ID):
     # Reset index para poder filtrar por 'Escuela_ID'

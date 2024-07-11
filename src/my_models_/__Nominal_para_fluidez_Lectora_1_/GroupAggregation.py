@@ -1,4 +1,5 @@
 from src.my_models_._abstract_model_.AbstractGroupAggregation import AbstractGroupAggregation
+
 import pandas as pd
 import src.tools.utils as u
 import os
@@ -44,11 +45,11 @@ class GroupAggregation(AbstractGroupAggregation):
         pass
 
     def salvar_df(self):
-        u.save_dataframe_to_csv(self._df_Escuela_ID_Alumno_ID_count,'data/processed/transformed/Nominal/_df_FL_Escuela_ID_Alumno_ID_count.csv')
-        u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/Nominal/_df_FL_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
-        u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count,'data/processed/transformed/Nominal/_df_FL_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count.csv') 
-        u.save_dataframe_to_csv(self._df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/Nominal/_df_FL_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
-        u.save_dataframe_to_csv(self._df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/Nominal/_df_FL_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Escuela_ID_Alumno_ID_count,'data/processed/transformed/Nominal/_df_Escuela_ID_Alumno_ID_count.csv')
+        u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/Nominal/_df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count,'data/processed/transformed/Nominal/_df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/Nominal/_df_Nivel_Unificado_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
+        u.save_dataframe_to_csv(self._df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/Nominal/_df_Supervisión_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
 
     def datos_institucionales(self,Escuela_ID):
         datosInstitucionales_dict = filtrar_datos_institucionales_por_escuela(
@@ -64,10 +65,10 @@ class GroupAggregation(AbstractGroupAggregation):
         )        
         return lista_de_cursos
         
-    def matricula_por_escuela(self,Escuela_ID):        
+    def matricula_por_escuela(self,Escuela_ID):
         return filtrar_matricula_por_escuela(
             Escuela_ID,
-            self.processed_dataframe,
+            self._df_Escuela_ID_Alumno_ID_count, # está contando los alumnos que están en el dataframe en vez de traer el valor ya calculado
         )
     
     def matricula_por_curso(self,Escuela_ID):
@@ -92,6 +93,3 @@ class GroupAggregation(AbstractGroupAggregation):
                 dict_matricula_por_curso_division.get(Curso))
             
         return matricula_por_curso_división_tabla
-    
-
-

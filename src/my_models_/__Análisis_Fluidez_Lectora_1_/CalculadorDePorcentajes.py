@@ -2,6 +2,8 @@ import pandas as pd
 import src.tools.utils as u
 from src.my_models_.__Análisis_Fluidez_Lectora_1_.GroupAggregation import GroupAggregation
 from src.my_models_.__Análisis_Fluidez_Lectora_1_.Preprocessor import Preprocessor
+from src.tools.generator_filters import generate_filter_class
+
 """
 Esta clase va a calcular los porcentajes de desempeño
 va a recibir todos los dataframes para que haga los cálculos
@@ -10,6 +12,21 @@ class CalculadorDePorcentajes:
     def __init__(self , group_agg : GroupAggregation):
         self.group_agg = group_agg
         self.preprocessor = Preprocessor(None)
+
+        # probando filtros
+        # Ejemplo de uso
+        filter_methods = {
+            'matricula_por_escuela': 'nominal_df_Escuela_ID_Alumno_ID_count',
+            'desempeno_por_curso': 'nominal_df_Escuela_ID_Desempeno'
+        }
+
+        main_dir = ''
+        filter_dir = '______Filtros'
+        class_name = 'Filtro'
+
+        generate_filter_class(filter_methods, main_dir, filter_dir, class_name)
+
+
         pass
 
     def calcular_porcentajes_desempeño(self):

@@ -8,4 +8,4 @@ def matricula_por_escuela(Escuela_ID, dFrame):
     if not dFrame_filtrado.empty:
         return int(dFrame_filtrado['Alumno_ID'].values[0])
     else:
-        return None  # o algún valor por defecto que prefieras, si no hay coincidencias
+        return 0  # o algún valor por defecto que prefieras, si no hay coincidencias

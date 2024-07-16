@@ -7,21 +7,24 @@ import src.tools.DataFrameToTabla as DataFrameToTabla
 import src.tools.DictToDataFrame as DictToDataFrame
 from src.my_models_.__Nominal_para_fluidez_Lectora_1_.Main import Main as mainNominal
 from src.my_models_.__Análisis_Fluidez_Lectora_1_.Main import Main as mainFluidezLectora
+from src.my_models_.____Filtros.Filtro import Filtro
 # from src.my_models_.__Nominal_para_fluidez_Lectora_1_.Report import Report as rNom
 # from src.my_models_.__Análisis_Fluidez_Lectora_1_.Report import Report as rAFL
 import pandas as pd
-from src.my_models_.____Filtros.datos_institucionales import datos_institucionales
-from src.my_models_.____Filtros.matricula_por_escuela import matricula_por_escuela
-from src.my_models_.____Filtros.desempeño_por_escuela import desempeño_por_escuela
-from src.my_models_.____Filtros.lista_de_cursos_escuela import lista_de_cursos_escuela
-from src.my_models_.____Filtros.listado_de_alumnos import listado_de_alumnos
-from src.my_models_.____Filtros.matricula_por_escuela_y_curso import matricula_por_escuela_y_curso
-from src.my_models_.____Filtros.matricula_por_escuela_curso_y_division import matricula_por_escuela_curso_y_division
+
+from src.my_models_.____Filtros.funciones.datos_institucionales import datos_institucionales
+from src.my_models_.____Filtros.funciones.matricula_por_escuela import matricula_por_escuela
+from src.my_models_.____Filtros.funciones.desempeño_por_escuela import desempeño_por_escuela
+from src.my_models_.____Filtros.funciones.lista_de_cursos_escuela import lista_de_cursos_escuela
+from src.my_models_.____Filtros.funciones.listado_de_alumnos import listado_de_alumnos
+from src.my_models_.____Filtros.funciones.matricula_por_escuela_y_curso import matricula_por_escuela_y_curso
+from src.my_models_.____Filtros.funciones.matricula_por_escuela_curso_y_division import matricula_por_escuela_curso_y_division
 
 class ReporteEscuela : #(AbstractReport):
     def __init__(self, nominal : mainNominal , fluidez : mainFluidezLectora):
         self.nominal = nominal
         self.Fl = fluidez
+        self.filtro = Filtro(nominal,fluidez)
 
     def do_report(self):
         self.do_report_escuela()
@@ -41,36 +44,36 @@ class ReporteEscuela : #(AbstractReport):
             'Escuela_ID' : None,
             'datos institucionales' : None
         }
-        # iterar sobre los elementos de la lista de escuelas generadas en el Main del Nominal
-        #####################################################################################################
-        #####################################################################################################
-        #####################################################################################################
-        #####################################################################################################
-        ############### TENGO QUE USAR UN HELPER PARA PODER HACERLO DE OTRA FORMA ###########################
-        ############### TENGO QUE USAR UN HELPER PARA PODER HACERLO DE OTRA FORMA ###########################
-        ############### TENGO QUE USAR UN HELPER PARA PODER HACERLO DE OTRA FORMA ###########################
-        ############### TENGO QUE USAR UN HELPER PARA PODER HACERLO DE OTRA FORMA ###########################
-        ############### TENGO QUE USAR UN HELPER PARA PODER HACERLO DE OTRA FORMA ###########################
-        #####################################################################################################
-        #####################################################################################################
-        #####################################################################################################
-        #####################################################################################################
-        
-
         for Escuela_ID in self.nominal.listaEscuelas_IDs:
             dictDatos = {
                 'Escuela_ID' : Escuela_ID,
                 'data' : {
-                    'datos_institucionales' : self.datos_institucionales(Escuela_ID , self.nominal.df_nominal_datos_institucionales),
-                    'lista_de_cursos_escuela' : self.lista_de_cursos_escuela(Escuela_ID , self.nominal.df_nominal_processed),
-                    'matricula_por_escuela' : self.matricula_por_escuela(Escuela_ID , self.nominal.group_agg._df_Escuela_ID_Alumno_ID_count),
-                    'matricula_por_escuela_curso' : self.matricula_por_escuela_y_curso(Escuela_ID , self.nominal.group_agg._df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count),
-                    'matricula_por_escuela_curso_división' : self.matricula_por_escuela_curso_división(Escuela_ID , self.nominal.group_agg._df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count , self.lista_de_cursos_escuela(Escuela_ID , self.nominal.df_nominal_processed) ),
-                    #'fluidez lectora 1' : {
-                    #    'matricula_por_escuela_fluidez_lectora_1' : self.Fl.group_agg.matricula_por_escuela_fluidez_lectora_1(Escuela_ID)
-                    #}
+                    'datos_institucionales' : self.filtro._nominal_df_nominal_datos_institucionales(Escuela_ID),                    
+                    'lista_de_cursos_escuela' : self.filtro._nominal_lista_de_cursos_escuela(Escuela_ID),
+                    'matricula_por_escuela' : self.filtro._nominal_df_Escuela_ID_Alumno_ID_count(Escuela_ID),
+                    'matricula_por_escuela_curso' : self.filtro._nominal_df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count(Escuela_ID),
+                    'matricula_por_escuela_curso_división' : self.filtro._nominal_df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count(Escuela_ID),
+                    'fluidez lectora 1' : {
+                       'matricula_por_escuela_fluidez_lectora_1' : self.filtro._fluidez_df_Escuela_ID_Alumno_ID_count(Escuela_ID),
+                    }
                 }
             }
+            # cuando tengo datos procesados de fluidez 1
+            if dictDatos['data']['fluidez lectora 1']['matricula_por_escuela_fluidez_lectora_1'] != 0 :                
+                dictDatosFluidez_Lectora = {                    
+                    'matricula_por_escuela_fluidez_lectora_1' : self.filtro._fluidez_df_Escuela_ID_Alumno_ID_count(Escuela_ID),
+                    'listado_de_cursos_fluidez_lectora_1' : self.filtro._fluidez_lista_de_cursos_escuela(Escuela_ID),
+                    'matricula_por_curso_fluidez_lectora_1' : self.filtro._fluidez_df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count(Escuela_ID),
+                    'matricula_por_curso_y_división_fluidez_lectora_1' : self.filtro._fluidez_df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count(Escuela_ID),
+                    'desempeño_por_escuela' : self.filtro._fluidez_df_Desempeño_por_Escuela(Escuela_ID),
+                    'desempeño_por_escuela_y_curso' : self.filtro._fluidez_df_Desempeño_por_Escuela_CURSO_NORMALIZADO(Escuela_ID),
+                    'total_alumnos_por_tipo_de_desempeño_por_curso' : self.filtro._fluidez_total_alumnos_por_desempeño_por_escuela_y_curso(Escuela_ID),
+                    'desempeño_por_escuela_curso_y_division' : self.filtro._fluidez_df_Desempeño_por_Escuela_CURSO_NORMALIZADO_Division(Escuela_ID),
+                }
+
+                # reemplazdo la clave de fl anterior con la nueva generada
+                dictDatos['data']['fluidez lectora 1'] = dictDatosFluidez_Lectora
+
             self.listDictFinal.append(dictDatos)
         print(dictDatos)
         dataDict = u.obtener_data_de_la_lista(

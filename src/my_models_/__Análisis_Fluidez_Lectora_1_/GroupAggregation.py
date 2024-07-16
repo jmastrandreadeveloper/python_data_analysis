@@ -30,6 +30,7 @@ class GroupAggregation(AbstractGroupAggregation):
         # llamo desde acá al agrupamiento que quiero..
         self.df_alumnos_con_MÁXIMA_cant_palabras = dataframe
         # agrupamientos que salen de la clase abstracta dado que son comunes para los dos dataframes
+        self._df_Escuela_ID_CURSO_NORMALIZADO_list = self.df_lista_de_cursos_normalizados()
         self._df_Escuela_ID_Alumno_ID_count = self.df_Escuela_ID_Alumno_ID_count()
         self._df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count()
         self._df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count = self.df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count()
@@ -55,6 +56,7 @@ class GroupAggregation(AbstractGroupAggregation):
         pass       
         
     def salvar_df(self):
+        u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_list,'data/processed/transformed/Fluidez_1/_df_Escuela_ID_CURSO_NORMALIZADO_list.csv')
         u.save_dataframe_to_csv(self._df_Escuela_ID_Alumno_ID_count,'data/processed/transformed/Fluidez_1/_df_Escuela_ID_Alumno_ID_count.csv')
         u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count,'data/processed/transformed/Fluidez_1/_df_Escuela_ID_CURSO_NORMALIZADO_Alumno_ID_count.csv') 
         u.save_dataframe_to_csv(self._df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count,'data/processed/transformed/Fluidez_1/_df_Escuela_ID_CURSO_NORMALIZADO_División_Alumno_ID_count.csv') 

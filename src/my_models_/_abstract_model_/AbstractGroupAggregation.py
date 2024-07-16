@@ -20,6 +20,15 @@ class AbstractGroupAggregation(ABC):
 
     #### estos agrupamientos son comunes para ambos dataframes
 
+    def df_lista_de_cursos_normalizados(self):
+        required_columns = ['Escuela_ID', 'CURSO_NORMALIZADO']
+        missing_columns = [col for col in required_columns if col not in self.processed_dataframe.columns]
+        if not missing_columns:
+            result = self.processed_dataframe.groupby('Escuela_ID')['CURSO_NORMALIZADO'].agg(lambda x: sorted(set(x)))
+            return result.reset_index()
+        else:
+            raise ValueError(f'Las columnas especificadas no existen en el dataframe. Columnas faltantes: {missing_columns}')
+
     def df_Escuela_ID_Alumno_ID_count(self):
         required_columns = ['Escuela_ID', 'Alumno_ID']
         missing_columns = [col for col in required_columns if col not in self.processed_dataframe.columns]

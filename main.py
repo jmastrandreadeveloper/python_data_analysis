@@ -14,7 +14,7 @@ def main():
     u.create_folder_treeV2('__Análisis_Fluidez_Lectora_1_')
 
     loader = DataLoader('Nominal.csv')
-    dfnom = loader.load_csv()   
+    dfnom = loader.load_csv()
 
     loader = DataLoader('Fluidez Lectora 1.csv')
     df_FluidezLectora_1 = loader.load_csv()    
